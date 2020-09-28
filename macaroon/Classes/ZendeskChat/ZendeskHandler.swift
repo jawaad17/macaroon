@@ -46,6 +46,11 @@ open class ZendeskHandler: DevTool {
             fatalError("Zendesk Chat not initialized properly. Reason: \(error.localizedDescription)")
         }
     }
+
+    open func closeZendeskConnection() {
+        Chat.connectionProvider?.connect()
+        Chat.chatProvider?.endChat()
+    }
 }
 
 extension ZendeskHandler {
