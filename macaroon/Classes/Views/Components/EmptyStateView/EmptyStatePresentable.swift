@@ -16,6 +16,14 @@ extension EmptyStatePresentable {
     }
 }
 
+extension EmptyStatePresentable {
+    public func restartLoadingAnimatingOnReappeared() {
+        if let loadingIndicator = emptyStateView.currentContentView as? LoadingIndicator {
+            loadingIndicator.restartAnimating()
+        }
+    }
+}
+
 extension EmptyStatePresentable where Self: UIView {
     public var emptyState: EmptyStateView.State {
         get { emptyStateView.state }
@@ -31,7 +39,9 @@ extension EmptyStatePresentable where Self: UIView {
     }
 
     private func addEmptyState() {
-        if emptyStateView.isDescendant(of: self) { return }
+        if emptyStateView.isDescendant(of: self) {
+            return
+        }
 
         addSubview(emptyStateView)
         emptyStateView.snp.makeConstraints { maker in
@@ -69,7 +79,9 @@ extension EmptyStatePresentable where Self: UIViewController {
     }
 
     public func addEmptyState() {
-        if emptyStateView.isDescendant(of: self.view) { return }
+        if emptyStateView.isDescendant(of: self.view) {
+            return
+        }
 
         view.addSubview(emptyStateView)
         emptyStateView.snp.makeConstraints { maker in

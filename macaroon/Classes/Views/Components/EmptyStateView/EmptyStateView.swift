@@ -5,14 +5,21 @@ import SnapKit
 import UIKit
 
 public class EmptyStateView: UIView {
-    internal(set) public var state: State = .none {
-        didSet { stateDidChange() }
-    }
-    public var showsLoadingOnRefreshing = false
-
     public weak var dataSource: EmptyStateViewDataSource?
 
-    private var currentContentView: UIView?
+    public var showsLoadingOnRefreshing = false
+
+    public internal(set) var state: State = .none {
+        didSet {
+            switch (oldValue, state) {
+            case (.none, .none): break
+            case (.loading, .loading): break
+            default: stateDidChange()
+            }
+        }
+    }
+
+    public private(set) var currentContentView: UIView?
 }
 
 extension EmptyStateView {
@@ -35,11 +42,17 @@ extension EmptyStateView {
                 addLoading()
             }
         case .noContent(let userInfo):
-            addNoContent(userInfo: userInfo)
+            addNoContent(
+                userInfo: userInfo
+            )
         case .noNetwork(let userInfo):
-            addNoNetwork(userInfo: userInfo)
+            addNoNetwork(
+                userInfo: userInfo
+            )
         case .fault(let userInfo):
-            addFault(userInfo: userInfo)
+            addFault(
+                userInfo: userInfo
+            )
         }
     }
 
@@ -47,52 +60,169 @@ extension EmptyStateView {
         if let loadingIndicator = currentContentView as? LoadingIndicator {
             loadingIndicator.stopAnimating()
         }
+
         currentContentView?.removeFromSuperview()
         currentContentView = nil
     }
 
     private func addLoading() {
-        if let loadingIndicator = dataSource?.loadingIndicator(in: self) {
-            let contentEdgeInsets = dataSource?.contentEdgeInsets(in: self)
+        guard let dataSource = dataSource else {
+            return
+        }
 
-            addSubview(loadingIndicator)
-            loadingIndicator.snp.makeConstraints { maker in
-                maker.centerX.equalToSuperview()
-                maker.top.equalToSuperview().inset(contentEdgeInsets?.top ?? 40.0)
+        let someLoadingIndicator =
+            dataSource.loadingIndicator(
+                in: self
+            )
+
+        guard let loadingIndicator = someLoadingIndicator else {
+            return
+        }
+
+        let contentAlignment =
+            dataSource.contentAlignment(
+                for: state,
+                in: self
+            )
+
+        addSubview(
+            loadingIndicator
+        )
+        loadingIndicator.fitToHorizontalIntrinsicSize()
+        loadingIndicator.snp.makeConstraints {
+            let horizontalPaddings: LayoutHorizontalPaddings
+
+            switch contentAlignment {
+            case .top(let padding, let someHorizontalPaddings):
+                horizontalPaddings = someHorizontalPaddings
+
+                $0.top == padding
+            case .center(let offsetY, let someHorizontalPaddings):
+                horizontalPaddings = someHorizontalPaddings
+
+                $0.center(
+                    offset: (0, offsetY)
+                )
+            case .scaleToFit(let paddings):
+                horizontalPaddings = (paddings.leading, paddings.trailing)
+
+                $0.setPaddings(
+                    paddings
+                )
             }
 
-            loadingIndicator.startAnimating()
-
-            currentContentView = loadingIndicator
+            $0.width <=
+                snp.width -
+                horizontalPaddings.leading.layoutMetric -
+                horizontalPaddings.trailing.layoutMetric
         }
+
+        loadingIndicator.startAnimating()
+
+        currentContentView = loadingIndicator
     }
 
     private func addNoContent(userInfo: Any?) {
-        dataSource?.noContentView(userInfo: userInfo, in: self).executeIfPresent(addCustomContent)
+        let someNoContentView =
+            dataSource?.noContentView(
+                userInfo: userInfo,
+                in: self
+            )
+
+        guard let noContentView = someNoContentView else {
+            return
+        }
+
+        addCustomContent(
+            noContentView
+        )
     }
 
     private func addNoNetwork(userInfo: Any?) {
-        dataSource?.noNetworkView(userInfo: userInfo, in: self).executeIfPresent(addCustomContent)
+        let someNoNetworkView =
+            dataSource?.noNetworkView(
+                userInfo: userInfo,
+                in: self
+            )
+
+        guard let noNetworkView = someNoNetworkView else {
+            return
+        }
+
+        addCustomContent(
+            noNetworkView
+        )
     }
 
     private func addFault(userInfo: Any?) {
-        dataSource?.faultView(userInfo: userInfo, in: self).executeIfPresent(addCustomContent)
+        let someFaultView =
+            dataSource?.faultView(
+                userInfo: userInfo,
+                in: self
+            )
+
+        guard let faultView = someFaultView else {
+            return
+        }
+
+        addCustomContent(
+            faultView
+        )
     }
 
-    private func addCustomContent(_ contentView: UIView) {
-        let contentEdgeInsets = dataSource?.contentEdgeInsets(in: self)
+    private func addCustomContent(
+        _ contentView: UIView
+    ) {
+        let contentAlignment =
+            dataSource?.contentAlignment(
+                for: state,
+                in: self
+            ) ?? .center(offset: 0, horizontalPaddings: (0, 0))
 
-        addSubview(contentView)
-        contentView.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(contentEdgeInsets?.top ?? 0.0)
-            maker.leading.equalToSuperview().inset(contentEdgeInsets?.left ?? 0.0)
-            maker.trailing.equalToSuperview().inset(contentEdgeInsets?.right ?? 0.0)
+        addSubview(
+            contentView
+        )
+        contentView.snp.makeConstraints {
+            let horizontalPaddings: LayoutHorizontalPaddings
 
-            if let bottomInset = contentEdgeInsets?.bottom {
-                maker.bottom.greaterThanOrEqualToSuperview().inset(bottomInset)
-            } else {
-                maker.bottom.equalToSuperview()
+            switch contentAlignment {
+            case .top(let padding, let someHorizontalPaddings):
+                horizontalPaddings = someHorizontalPaddings
+
+                $0.height <= snp.height - padding
+                $0.top == padding
+
+                $0.centerHorizontally()
+            case .center(let offsetY, let someHorizontalPaddings):
+                horizontalPaddings = someHorizontalPaddings
+
+                $0.height <= snp.height
+                $0.top >= 16
+
+                $0.centerVertically(
+                    offset: (offsetY, .defaultHigh),
+                    horizontalPaddings: (
+                        (someHorizontalPaddings.leading, .required),
+                        (someHorizontalPaddings.trailing, .required)
+                    )
+                )
+            case .scaleToFit(let paddings):
+                horizontalPaddings = (paddings.leading, paddings.trailing)
+
+                $0.height <=
+                    snp.height -
+                    paddings.top.layoutMetric -
+                    paddings.bottom.layoutMetric
+
+                $0.setPaddings(
+                    paddings
+                )
             }
+
+            $0.width <=
+                snp.width -
+                horizontalPaddings.leading.layoutMetric -
+                horizontalPaddings.trailing.layoutMetric
         }
 
         currentContentView = contentView
@@ -107,6 +237,19 @@ extension EmptyStateView {
         case noContent(userInfo: Any? = nil)
         case noNetwork(userInfo: Any? = nil)
         case fault(userInfo: Any? = nil)
+
+        public var isLoading: Bool {
+            switch self {
+            case .loading, .refreshing: return true
+            default: return false
+            }
+        }
+    }
+
+    public enum ContentAlignment {
+        case top(padding: LayoutMetric, horizontalPaddings: LayoutHorizontalPaddings)
+        case center(offset: LayoutMetric, horizontalPaddings: LayoutHorizontalPaddings)
+        case scaleToFit(LayoutPaddings)
     }
 }
 
@@ -115,7 +258,10 @@ public protocol EmptyStateViewDataSource: AnyObject {
     func noContentView(userInfo: Any?, in view: EmptyStateView) -> UIView?
     func noNetworkView(userInfo: Any?, in view: EmptyStateView) -> UIView?
     func faultView(userInfo: Any?, in view: EmptyStateView) -> UIView?
-    func contentEdgeInsets(in view: EmptyStateView) -> UIEdgeInsets?
+    /// <note>
+    /// If the returning value isn't center, then the loading indicator will pin to top with the
+    /// padding.
+    func contentAlignment(for state: EmptyStateView.State, in view: EmptyStateView) -> EmptyStateView.ContentAlignment
 }
 
 extension EmptyStateViewDataSource {
@@ -138,7 +284,7 @@ extension EmptyStateViewDataSource {
         return nil
     }
 
-    public func contentEdgeInsets(in view: EmptyStateView) -> UIEdgeInsets? {
-        return nil
+    public func contentAlignment(for state: EmptyStateView.State, in view: EmptyStateView) -> EmptyStateView.ContentAlignment {
+        return .center(offset: 0, horizontalPaddings: (0, 0))
     }
 }

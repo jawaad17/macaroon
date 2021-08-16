@@ -10,8 +10,8 @@ public protocol ListDataController: ListDataSource, ListDataLoader {
     func loadNextListData(onCompleted execute: @escaping (Result<ListModifier, ListError>) -> Void)
     func reloadListData(onCompleted execute: @escaping (Result<ListModifier, ListError>) -> Void)
     func unloadListData(onCompleted execute: @escaping () -> Void)
-    func cancelListData() /// <note> Cancel both list data and reload list data endpoints. Both can be handled by a single endpoint handler.
-    func cancelListNextData()
+    func discardLoadingListData() /// <note> Cancel both list data and reload list data endpoints. Both can be handled by a single endpoint handler.
+    func discardLoadingNextListData()
 }
 
 extension ListDataController {
@@ -19,44 +19,91 @@ extension ListDataController {
         return false
     }
 
-    public func loadNextListData(onCompleted execute: @escaping (Result<ListModifier, ListError>) -> Void) {
-        execute(.success(.none))
+    public func reloadListData(
+        onCompleted execute: @escaping (Result<ListModifier, ListError>) -> Void
+    ) {
+        loadListData(
+            onCompleted: execute
+        )
     }
 
-    public func cancelListNextData() { }
+    public func loadNextListData(
+        onCompleted execute: @escaping (Result<ListModifier, ListError>) -> Void
+    ) {
+        execute(
+            .success(.none)
+        )
+    }
+
+    public func discardLoadingNextListData() {}
 }
 
 extension ListDataController {
     public func loadList() {
         unloadList()
 
-        delegate?.listDataLoaderWillLoadList(self)
-        loadListData { [weak self] result in
-            guard let self = self else { return }
+        delegate?.listDataLoaderWillLoadList(
+            self
+        )
+
+        loadListData {
+            [weak self] result in
+
+            guard let self = self else {
+                return
+            }
 
             switch result {
             case .success(let listModifier):
-                self.delegate?.listDataLoader(self, didLoadList: listModifier)
+                self.delegate?.listDataLoader(
+                    self,
+                    didLoadList: listModifier
+                )
             case .failure(let listError):
-                self.delegate?.listDataLoader(self, didFailToLoadList: listError)
+                self.delegate?.listDataLoader(
+                    self,
+                    didFailToLoadList: listError
+                )
             }
         }
     }
 
     public func loadNextList() {
-        if !hasNextList { return }
-        if isEmpty() { return }
-        if isLoadingList || isLoadingNextList { return }
+        if !hasNextList {
+            return
+        }
 
-        delegate?.listDataLoaderWillLoadNextList(self)
-        loadNextListData { [weak self] result in
-            guard let self = self else { return }
+        if isEmpty() {
+            return
+        }
+
+        if isLoadingList ||
+           isLoadingNextList {
+            return
+        }
+
+        delegate?.listDataLoaderWillLoadNextList(
+            self
+        )
+
+        loadNextListData {
+            [weak self] result in
+
+            guard let self = self else {
+                return
+            }
 
             switch result {
             case .success(let listModifier):
-                self.delegate?.listDataLoader(self, didLoadNextList: listModifier)
+                self.delegate?.listDataLoader(
+                    self,
+                    didLoadList: listModifier
+                )
             case .failure(let listError):
-                self.delegate?.listDataLoader(self, didFailToLoadNextList: listError)
+                self.delegate?.listDataLoader(
+                    self,
+                    didFailToLoadNextList: listError
+                )
             }
         }
     }
@@ -66,34 +113,53 @@ extension ListDataController {
             loadList()
             return
         }
-        cancelList()
 
-        delegate?.listDataLoaderWillReloadList(self)
-        reloadListData { [weak self] result in
-            guard let self = self else { return }
+        discardLoadingList()
+
+        delegate?.listDataLoaderWillLoadList(
+            self
+        )
+
+        reloadListData {
+            [weak self] result in
+
+            guard let self = self else {
+                return
+            }
 
             switch result {
             case .success(let listModifier):
-                self.delegate?.listDataLoader(self, didReloadList: listModifier)
+                self.delegate?.listDataLoader(
+                    self,
+                    didLoadList: listModifier
+                )
             case .failure(let listError):
-                self.delegate?.listDataLoader(self, didFailToReloadList: listError)
+                self.delegate?.listDataLoader(
+                    self,
+                    didFailToLoadList: listError
+                )
             }
         }
     }
 
     public func unloadList() {
-        cancelList()
+        discardLoadingList()
 
-        unloadListData { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.listDataLoaderDidUnloadList(self)
+        unloadListData {
+            [weak self] in
+
+            guard let self = self else {
+                return
+            }
+
+            self.delegate?.listDataLoaderDidUnloadList(
+                self
+            )
         }
     }
-}
 
-extension ListDataController {
-    public func cancelList() {
-        cancelListNextData()
-        cancelListData()
+    public func discardLoadingList() {
+        discardLoadingNextListData()
+        discardLoadingListData()
     }
 }

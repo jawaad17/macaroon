@@ -5,18 +5,40 @@ import SnapKit
 import UIKit
 
 open class ListScreen: Screen, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, EmptyStateViewDataSource {
-    public lazy var listView = ListView(listLayout: listLayout)
+    public var blursFooterBackgroundOnUnderScrolling = false
+
+    public private(set) lazy var listView = ListView(listLayout: listLayout)
+    public private(set) lazy var footerView = UIView()
 
     public let listDataSource: ListDataSource
     public let listLayout: ListLayout
 
+    private lazy var footerBackgroundView = UIView()
+    private lazy var footerBlurBackgroundView: UIVisualEffectView = {
+        let view = UIVisualEffectView()
+
+        if #available(iOS 13, *) {
+            view.effect = UIBlurEffect(style: .systemUltraThinMaterial)
+        } else {
+            view.effect = UIBlurEffect(style: .regular)
+        }
+
+        return view
+    }()
+
+    private var isListLayoutFinalized = false
+
     public init(
         listDataSource: ListDataSource,
-        listLayout: ListLayout
+        listLayout: ListLayout,
+        configurator: ScreenConfigurable?
     ) {
         self.listDataSource = listDataSource
         self.listLayout = listLayout
-        super.init()
+
+        super.init(
+            configurator: configurator
+        )
     }
 
     open override func customizeAppearance() {
@@ -25,13 +47,28 @@ open class ListScreen: Screen, UICollectionViewDataSource, UICollectionViewDeleg
     }
 
     open func customizeListAppearance() {
-        listView.backgroundColor = .clear
+        listView.alwaysBounceVertical = true
+        listView.showsHorizontalScrollIndicator = false
+        listView.showsVerticalScrollIndicator = false
     }
 
     open override func prepareLayout() {
         super.prepareLayout()
         addList()
+        addFooter()
         updateListEmptyStateLayout()
+    }
+
+    open override func updateLayoutWhenViewDidLayoutSubviews() {
+        super.updateLayoutWhenViewDidLayoutSubviews()
+
+        if !isListLayoutFinalized {
+            updateListLayoutWhenViewDidFirstLayoutSubviews()
+            isListLayoutFinalized = true
+        }
+
+        updateListLayoutWhenViewDidLayoutSubviews()
+        updateLayoutWhenScrollViewDidScroll()
     }
 
     open func addList() {
@@ -44,6 +81,46 @@ open class ListScreen: Screen, UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
 
+    open func updateListLayoutWhenViewDidFirstLayoutSubviews() {
+        listView.setContentInset(
+            listLayout.contentInset
+        )
+    }
+
+    open func updateListLayoutWhenViewDidLayoutSubviews() {
+        if footerView.bounds.isEmpty {
+            return
+        }
+
+        let bottomInset = listLayout.contentInset.bottom
+
+        listView.setContentInset(
+            bottom: footerView.bounds.height + (bottomInset.isNoMetric ? 0 : bottomInset)
+        )
+    }
+
+    open func addFooter() {
+        view.addSubview(footerBackgroundView)
+        footerBackgroundView.snp.makeConstraints {
+            $0.setPaddings(
+                (.noMetric, 0, 0, 0)
+            )
+        }
+
+        footerBackgroundView.addSubview(
+            footerView
+        )
+        footerView.snp.makeConstraints {
+            $0.setPaddings(
+                (0, 0, .noMetric, 0)
+            )
+            $0.setBottomPadding(
+                0,
+                inSafeAreaOf: footerBackgroundView
+            )
+        }
+    }
+
     open override func setListeners() {
         super.setListeners()
         listView.dataSource = self
@@ -53,13 +130,28 @@ open class ListScreen: Screen, UICollectionViewDataSource, UICollectionViewDeleg
 
     open override func viewDidChangePreferredContentSizeCategory() {
         super.viewDidChangePreferredContentSizeCategory()
+
+        if !isViewAppeared {
+            return
+        }
+
         listLayout.invalidateLayout(forceLayoutUpdate: true)
         updateLayoutWhenViewDidLayoutSubviews()
     }
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        finalizeListLayout()
+        listLayout.prepareForUse()
+    }
+
+    open override func viewWillAppear(
+        _ animated: Bool
+    ) {
+        super.viewWillAppear(animated)
+
+        if !isViewFirstAppeared {
+            listView.restartLoadingAnimatingOnReappeared()
+        }
     }
 
     /// <mark> UICollectionViewDataSource
@@ -136,6 +228,11 @@ open class ListScreen: Screen, UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
 
+    /// <mark> UIScrollViewDelegate
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateLayoutWhenScrollViewDidScroll()
+    }
+
     /// <mark> EmptyStateViewDataSource
     open func loadingIndicator(in view: EmptyStateView) -> LoadingIndicator? {
         let loadingIndicator: UIActivityIndicatorView
@@ -160,8 +257,42 @@ open class ListScreen: Screen, UICollectionViewDataSource, UICollectionViewDeleg
         return nil
     }
 
-    open func contentEdgeInsets(in view: EmptyStateView) -> UIEdgeInsets? {
-        return nil
+    open func contentAlignment(for state: EmptyStateView.State, in view: EmptyStateView) -> EmptyStateView.ContentAlignment {
+        return .center(offset: 0, horizontalPaddings: (0, 0))
+    }
+}
+
+extension ListScreen {
+    public func reloadData(
+        _ modifier: ListModifier,
+        onCompleted execute: (() -> Void)? = nil
+    ) {
+        listView.reloadData(
+            modifier,
+            for: listLayout,
+            onAppeared: isViewAppeared,
+            onCompleted: {
+                [weak self] in
+
+                guard let self = self else {
+                    return
+                }
+
+                self.updateLayoutWhenScrollViewDidScroll()
+
+                execute?()
+            }
+        )
+    }
+}
+
+extension ListScreen {
+    public func item(for cell: UICollectionViewCell) -> Any? {
+        guard let indexPath = listView.indexPath(for: cell) else {
+            return nil
+        }
+
+        return listDataSource[indexPath]
     }
 }
 
@@ -172,7 +303,42 @@ extension ListScreen {
 }
 
 extension ListScreen {
-    private func finalizeListLayout() {
-        listLayout.prepareForUse()
+    private func updateLayoutWhenScrollViewDidScroll() {
+        updateFooterBackgroundLayoutWhenScrollViewDidScroll()
+    }
+
+    private func addFooterBlurBackground() {
+        if footerBlurBackgroundView.isDescendant(
+            of: footerBackgroundView
+        ) {
+            return
+        }
+
+        footerBackgroundView.insertSubview(
+            footerBlurBackgroundView,
+            at: 0
+        )
+        footerBlurBackgroundView.snp.makeConstraints {
+            $0.setPaddings()
+        }
+    }
+
+    private func updateFooterBackgroundLayoutWhenScrollViewDidScroll() {
+        if !blursFooterBackgroundOnUnderScrolling {
+            return
+        }
+
+        if footerView.bounds.isEmpty {
+            return
+        }
+
+        addFooterBlurBackground()
+
+        if isListLayoutFinalized {
+            listView.layoutIfNeeded()
+        }
+
+        let endOfContent = listView.contentSize.height - listView.contentOffset.y
+        footerBlurBackgroundView.isHidden = endOfContent <= footerBackgroundView.frame.minY
     }
 }

@@ -4,85 +4,172 @@ import Foundation
 import SnapKit
 import UIKit
 
-public protocol TabBarConfigurable: AnyObject {
-    var isTabBarHidden: Bool { get set }
+public protocol TabBarConfigurable: UIViewController {
+    var tabBarHidden: Bool { get set }
     var tabBarSnapshot: UIView? { get set }
 }
 
-extension TabBarConfigurable where Self: UIViewController {
-    public func setNeedsTabBarAppearanceUpdateOnAppearing(animated: Bool = true) {
-        guard let tabBarContainer = tabBarContainer else { return }
-        
-        isTabBarHidden.execute(
-            true: { tabBarContainer.setTabBarHidden(true, animated: animated) },
-            false: updateTabBarAppearanceOnStacked
+extension TabBarConfigurable {
+    public func setNeedsTabBarAppearanceUpdateOnAppearing(
+        animated: Bool
+    ) {
+        guard let tabBarContainer = tabBarContainer else {
+            return
+        }
+
+        if !tabBarHidden {
+            updateTabBarAppearanceOnStacked()
+            return
+        }
+
+        tabBarContainer.setTabBarHidden(
+            true,
+            animated: animated
         )
     }
 
     public func setNeedsTabBarAppearanceUpdateOnAppeared() {
-        guard let tabBarContainer = tabBarContainer else { return }
+        guard let tabBarContainer = tabBarContainer else {
+            return
+        }
 
-        if !isTabBarHidden {
+        if !tabBarHidden {
             removeTabBarSnapshot()
         }
-        tabBarContainer.setTabBarHidden(isTabBarHidden, animated: false)
+
+        tabBarContainer.setTabBarHidden(
+            tabBarHidden,
+            animated: false
+        )
     }
 
     public func setNeedsTabBarAppearanceUpdateOnDisappeared() {
-        if tabBarContainer == nil { return }
+        if tabBarContainer == nil {
+            return
+        }
+
         updateTabBarAppearanceOnPopped()
     }
 }
 
-extension TabBarConfigurable where Self: UIViewController {
+extension TabBarConfigurable {
     private func updateTabBarAppearanceOnStacked() {
-        if isTabBarHidden { return }
-
-        guard let stackedViewControllers = navigationController?.viewControllers else { return }
-        guard let stackIndex = stackedViewControllers.firstIndex(of: self)
-            .unwrapConditionally(where: { $0 > stackedViewControllers.startIndex && $0 == stackedViewControllers.index(before: stackedViewControllers.endIndex)}) // 1 -> Root, 2 -> Popping
-        else { return }
-        guard let previousViewControllerInStack = stackedViewControllers[stackedViewControllers.index(before: stackIndex)] as? TabBarConfigurable else { return }
-
-        if previousViewControllerInStack.isTabBarHidden {
-            addTabBarSnaphot()
+        if tabBarHidden {
+            return
         }
+
+        guard let stack = navigationController?.viewControllers else {
+            return
+        }
+        guard let prevStackIndex =
+                stack
+                    .firstIndex(
+                        of: self
+                    )
+                    .unwrapConditionally(
+                        where: {
+                            $0 > stack.startIndex &&
+                            $0 == stack.lastIndex
+                        }
+                    )
+                    .unwrap(
+                        {
+                            $0 - 1
+                        }
+                    )
+        else {
+            return
+        }
+        guard let previousViewControllerInStack = stack[prevStackIndex] as? TabBarConfigurable else {
+            return
+        }
+
+        if !previousViewControllerInStack.tabBarHidden {
+            return
+        }
+
+        addTabBarSnaphot()
     }
 
     private func updateTabBarAppearanceOnPopped() {
-        if isTabBarHidden { return }
+        if tabBarHidden {
+            return
+        }
 
-        guard let stackedViewControllers = navigationController.unwrap({ $0.viewControllers }) else { return }
-        guard let nextStackIndex = stackedViewControllers.firstIndex(of: self)
-            .unwrap({ stackedViewControllers.index(after: $0) })
-            .unwrapConditionally(where: { $0 < stackedViewControllers.endIndex })
-        else { return }
-        if (stackedViewControllers[nextStackIndex] as? TabBarConfigurable).unwrapConditionally(where: { !$0.isTabBarHidden }) != nil { return }
+        guard let stack = navigationController?.viewControllers else {
+            return
+        }
+        guard let nextStackIndex =
+                stack.firstIndex(
+                    of: self
+                )
+                .unwrap(
+                    {
+                        $0 + 1
+                    }
+                )
+                .unwrapConditionally(
+                    where: {
+                        $0 < stack.endIndex
+                    }
+                )
+        else {
+            return
+        }
+        guard let nextViewControllerInStack = stack[nextStackIndex] as? TabBarConfigurable else {
+            return
+        }
+
+        if !nextViewControllerInStack.tabBarHidden {
+            return
+        }
 
         addTabBarSnaphot()
     }
 
     private func addTabBarSnaphot() {
-        if tabBarSnapshot.unwrapConditionally(where: { $0.isDescendant(of: view) }) != nil { return }
+        if tabBarSnapshot.unwrapConditionally(
+            where: {
+                $0.isDescendant(
+                    of: view
+                )
+            }
+        ) != nil {
+            return
+        }
 
-        guard let tabBarContainer = tabBarContainer else { return }
+        guard let tabBarContainer = tabBarContainer else {
+            return
+        }
 
         let tabBar = tabBarContainer.tabBar
+        let someTabBarSnapshot =
+            tabBar.snapshotView(
+                afterScreenUpdates: true
+            )
 
-        guard let newTabBarSnaphot = tabBar.snapshotView(afterScreenUpdates: true) else { return }
+        guard let tabBarSnapshot = someTabBarSnapshot else {
+            return
+        }
 
         /// <note> Because snapshow does not copy shadow layer.
-        newTabBarSnaphot.layer.shadowColor = tabBar.shadowLayer?.shadowColor ?? UIColor.black.cgColor
-        newTabBarSnaphot.layer.shadowOffset = tabBar.shadowLayer?.shadowOffset ?? CGSize(width: 0.0, height: -3.0)
-        newTabBarSnaphot.layer.shadowRadius = tabBar.shadowLayer?.shadowRadius ?? 3.0
-        newTabBarSnaphot.layer.shadowOpacity = tabBar.shadowLayer?.shadowOpacity ?? 0.0
-        newTabBarSnaphot.layer.shadowPath = tabBar.shadowLayer?.shadowPath
-        newTabBarSnaphot.layer.masksToBounds = tabBar.layer.masksToBounds
+        tabBarSnapshot.layer.shadowColor = tabBar.shadowLayer.shadowColor ?? UIColor.black.cgColor
+        tabBarSnapshot.layer.shadowOffset = tabBar.shadowLayer.shadowOffset
+        tabBarSnapshot.layer.shadowRadius = tabBar.shadowLayer.shadowRadius
+        tabBarSnapshot.layer.shadowOpacity = tabBar.shadowLayer.shadowOpacity
+        tabBarSnapshot.layer.shadowPath = tabBar.shadowLayer.shadowPath
+        tabBarSnapshot.layer.masksToBounds = tabBar.layer.masksToBounds
 
-        view.addSubview(newTabBarSnaphot)
-        newTabBarSnaphot.frame = CGRect(origin: CGPoint(x: 0.0, y: view.bounds.height - tabBar.bounds.height), size: tabBar.bounds.size)
+        view.addSubview(
+            tabBarSnapshot
+        )
+        tabBarSnapshot.frame =
+            CGRect(
+                origin: CGPoint(x: 0.0, y: view.bounds.height - tabBar.bounds.height),
+                size: tabBar.bounds.size
+            )
 
-        tabBarSnapshot = newTabBarSnaphot
+        self.tabBarSnapshot = tabBarSnapshot
     }
 
     private func removeTabBarSnapshot() {
