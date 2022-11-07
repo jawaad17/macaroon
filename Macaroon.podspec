@@ -10,11 +10,11 @@ Pod::Spec.new do |s|
   s.name = 'Macaroon'
   s.version = '0.1.1'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
-  s.homepage = 'https://github.com/Hipo/macaroon'
+  s.homepage = 'https://github.com/jawaad17/macaroon'
   s.summary = 'iOS UIKit extension framework for providing structural interface functionality'
-  s.source = { :git => 'https://github.com/Hipo/macaroon.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/jawaad17/macaroon.git', :tag => s.version.to_s }
   s.author = { 'Hipo' => 'hello@hipolabs.com' }
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '12.0'
   s.swift_version = '5.0'
   s.default_subspec = 'Core'
 
