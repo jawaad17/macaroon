@@ -3,34 +3,18 @@
 import Foundation
 import UIKit
 
-open class CollectionSupplementaryView<
-    ContextView: ViewComposable & ListReusable
->: UICollectionReusableView,
-   ListComposable {
-    open class var contextPaddings: LayoutPaddings {
-        return (0, 0, 0, 0)
-    }
-
+open class CollectionSupplementaryView<ContextView: ViewComposable & ListReusable>: UICollectionReusableView, ListComposable {
     public lazy var contextView = getContextView()
 
-    public override init(
-        frame: CGRect
-    ) {
-        super.init(
-            frame: frame
-        )
-
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
         prepareLayout()
         setListeners()
     }
 
     @available(*, unavailable)
-    public required init?(
-        coder: NSCoder
-    ) {
-        fatalError(
-            "init(coder:) has not been implemented"
-        )
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     open func prepareLayout() {
@@ -38,13 +22,12 @@ open class CollectionSupplementaryView<
     }
 
     open func addContextView() {
-        addSubview(
-            contextView
-        )
-        contextView.snp.makeConstraints {
-            $0.setPaddings(
-                Self.contextPaddings
-            )
+        addSubview(contextView)
+        contextView.snp.makeConstraints { maker in
+            maker.top.equalToSuperview()
+            maker.leading.equalToSuperview()
+            maker.bottom.equalToSuperview()
+            maker.trailing.equalToSuperview()
         }
     }
 

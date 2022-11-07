@@ -3,57 +3,37 @@
 import Foundation
 import UIKit
 
-open class CollectionCell<
-    ContextView: ViewComposable & ListReusable
->: UICollectionViewCell,
-   ListComposable,
-   ListSeparatorAdaptable {
-    open class var contextPaddings: LayoutPaddings {
-        return (0, 0, 0, 0)
+open class CollectionCell<ContextView: ViewComposable & ListReusable>: UICollectionViewCell, ListComposable, ListSeparatorAdaptable {
+    open class var separatorStyle: ListSeparatorStyle {
+        return .none
     }
 
     public private(set) lazy var contextView = getContextView()
-    public private(set) var separatorView: UIView?
+    public private(set) lazy var separatorView = UIView()
 
-    open var separatorStyle: ListSeparatorStyle = .none {
-        didSet {
-            removeSeparator()
-            addSeparator()
-        }
-    }
-
-    public override init(
-        frame: CGRect
-    ) {
-        super.init(
-            frame: frame
-        )
-
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
         prepareLayout()
         setListeners()
     }
 
     @available(*, unavailable)
-    public required init?(
-        coder: NSCoder
-    ) {
-        fatalError(
-            "init(coder:) has not been implemented"
-        )
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     open func prepareLayout() {
         addContext()
+        addSeparator()
     }
 
     open func addContext() {
-        contentView.addSubview(
-            contextView
-        )
-        contextView.snp.makeConstraints {
-            $0.setPaddings(
-                Self.contextPaddings
-            )
+        contentView.addSubview(contextView)
+        contextView.snp.makeConstraints { maker in
+            maker.top.equalToSuperview()
+            maker.leading.equalToSuperview()
+            maker.bottom.equalToSuperview().inset(Self.separatorStyle.margin)
+            maker.trailing.equalToSuperview()
         }
     }
 
@@ -70,26 +50,12 @@ open class CollectionCell<
 
 extension CollectionCell {
     private func addSeparator() {
-        switch separatorStyle {
+        switch Self.separatorStyle {
         case .none:
             return
-        case .single(let separator):
-            if let separatorView = separatorView,
-               separatorView.isDescendant(
-                   of: contentView
-               ) {
-                return
-            }
-
-            separatorView =
-                contentView.addSeparator(
-                    separator
-                )
+        case .single(let separator, let padding):
+            if separatorView.isDescendant(of: contentView) { return }
+            separatorView = contentView.addSeparator(separator, at: .bottom)
         }
-    }
-
-    private func removeSeparator() {
-        separatorView?.removeFromSuperview()
-        separatorView = nil
     }
 }

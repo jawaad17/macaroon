@@ -3,23 +3,24 @@
 import Foundation
 import UIKit
 
-open class BaseControl:
-    UIControl,
-    BorderDrawable,
-    CornerDrawable,
-    ShadowDrawable {
+open class BaseControl: UIControl, ShadowDrawable {
     public var shadow: Shadow?
-
-    public private(set) lazy var shadowLayer = CAShapeLayer()
+    public var shadowLayer: CAShapeLayer?
 
     open override var isEnabled: Bool {
-        didSet { recustomizeAppearanceWhenStateDidChange() }
+        didSet {
+            recustomizeAppearanceWhenStateChanged()
+        }
     }
     open override var isSelected: Bool {
-        didSet { recustomizeAppearanceWhenStateDidChange() }
+        didSet {
+            recustomizeAppearanceWhenStateChanged()
+        }
     }
     open override var isHighlighted: Bool {
-        didSet { recustomizeAppearanceWhenStateDidChange() }
+        didSet {
+            recustomizeAppearanceWhenStateChanged()
+        }
     }
 
     public override init(frame: CGRect) {
@@ -36,23 +37,16 @@ open class BaseControl:
     open func recustomizeAppearance(for touchState: UIControl.TouchState) { }
 
     open func preferredUserInterfaceStyleDidChange() {
-        drawAppearance(
-            shadow: shadow
-        )
+        if let shadow = shadow {
+            drawShadow(shadow)
+        }
     }
 
     open func preferredContentSizeCategoryDidChange() { }
 
     open override func layoutSubviews() {
         super.layoutSubviews()
-
-        guard let shadow = shadow else {
-            return
-        }
-
-        updateOnLayoutSubviews(
-            shadow: shadow
-        )
+        updateShadowWhenViewDidLayoutSubviews()
     }
 
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -88,7 +82,7 @@ open class BaseControl:
 }
 
 extension BaseControl {
-    public func recustomizeAppearanceWhenStateDidChange() {
+    private func recustomizeAppearanceWhenStateChanged() {
         if isEnabled {
             if isSelected {
                 recustomizeAppearance(for: .selected)

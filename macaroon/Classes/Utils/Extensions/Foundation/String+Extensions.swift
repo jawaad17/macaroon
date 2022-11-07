@@ -27,63 +27,8 @@ extension String {
 }
 
 extension String {
-    public func hasOnlyLetters() -> Bool {
-        return
-            hasOnlyCharacters(
-                in: CharacterSet.letters
-            )
-    }
-
-    public func hasOnlyDigits() -> Bool {
-        return
-            hasOnlyCharacters(
-                in: CharacterSet.decimalDigits
-            )
-    }
-
-    public func hasOnlyCharacters(
-        in allowedCharacters: CharacterSet
-    ) -> Bool {
-        return
-            rangeOfCharacter(
-                from: allowedCharacters.inverted
-            ) == nil
-    }
-}
-
-extension String {
-    public func withoutWhitespaces() -> String {
-        return without(" ")
-    }
-
     public func without(_ string: String) -> String {
         return replacingOccurrences(of: string, with: "")
-    }
-
-    public func without(prefix: String) -> String {
-        if !hasPrefix(
-            prefix
-        ) {
-            return self
-        }
-
-        return String(
-            dropFirst(
-                prefix.count
-            )
-        )
-    }
-}
-
-extension String {
-    public func containsCaseInsensitive(_ string: String) -> Bool {
-        return range(of: string, options: .caseInsensitive) != nil
-    }
-}
-
-extension String {
-    public func replacingCharacters(in range: NSRange, with replacement: String) -> String {
-        return (self as NSString).replacingCharacters(in: range, with: replacement)
     }
 }
 
@@ -96,54 +41,7 @@ extension String {
         } else {
             options = [.usesFontLeading]
         }
-        let fittingBoundingRect = NSString(string: self).boundingRect(with: fittingSize, options: options, attributes: attributes.asSystemAttributes(), context: nil)
+        let fittingBoundingRect = NSString(string: self).boundingRect(with: fittingSize, options: options, attributes: attributes.convertedToSystemAttributes(), context: nil)
         return CGSize(width: min(fittingBoundingRect.width.ceil(), fittingSize.width), height: min(fittingBoundingRect.height.ceil(), fittingSize.height))
-    }
-}
-
-extension String {
-    public func copyToClipboard() {
-        UIPasteboard.general.string = self
-    }
-}
-
-extension String: Swift.Error {}
-
-extension String: LocalizedError {
-    public var errorDescription: String? {
-        return self
-    }
-}
-
-extension Substring {
-    public var string: String {
-        return String(self)
-    }
-}
-
-extension Optional where Wrapped == String {
-    public var isNilOrEmpty: Bool {
-        return unwrap(
-            \.isEmpty,
-            or: true
-        )
-    }
-
-    public var nonNil: String {
-        return self ?? ""
-    }
-}
-
-extension Array where Element == String? {
-    public func compound(
-        _ separator: String = " "
-    ) -> String {
-        return
-            compactMap {
-                $0
-            }
-            .joined(
-                separator: separator
-            )
     }
 }

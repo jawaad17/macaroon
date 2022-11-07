@@ -4,14 +4,14 @@ import Foundation
 import UIKit
 
 public struct ImagePlaceholder {
-    public let image: AssetImageSource?
-    public let text: EditText?
+    public let source: AssetImageSource?
+    public let description: EditText?
 
     public init(
-        image: AssetImageSource? = nil,
-        text: EditText? = nil
+        source: AssetImageSource? = nil,
+        description: EditText? = nil
     ) {
-        self.image = image
-        self.text = text
+        self.source = source
+        self.description = description
     }
 }

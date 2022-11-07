@@ -2,22 +2,19 @@
 
 import Foundation
 
-open class Screen:
-    UIViewController,
-    StatusBarConfigurable,
-    NavigationBarConfigurable,
-    ScreenComposable,
-    ScreenRoutable,
-    UIAdaptivePresentationControllerDelegate,
-    NotificationObserver {
-    public var statusBarHidden = false
+open class Screen: UIViewController, ScreenComposable, StatusBarConfigurable, NavigationBarConfigurable, UIAdaptivePresentationControllerDelegate, NotificationObserver {
+    public var isStatusBarHidden = false
     public var hidesStatusBarOnAppeared = false
     public var hidesStatusBarOnPresented = false
 
-    public var navigationBarHidden = false
-    public var hidesCloseBarButton = false
-    public var hidesDismissBarButtonIniOS13AndLater = false
-    public var disablesInteractivePop = false
+    public var isNavigationBarHidden = false
+    public var hidesCloseBarItem = false
+    public var hidesDismissBarItemIniOS13AndLater = false
+    public var disablesInteractivePopGesture = false
+
+    public var leftBarItems: [NavigationBarItemConvertible] = []
+    public var rightBarItems: [NavigationBarItemConvertible] = []
+
     public var disablesInteractiveDismiss = false {
         didSet {
             if #available(iOS 13.0, *) {
@@ -26,13 +23,7 @@ open class Screen:
         }
     }
 
-    public var leftNavigationBarButtonItems: [NavigationBarButtonItem] = []
-    public var rightNavigationBarButtonItems: [NavigationBarButtonItem] = []
-
     public var observations: [NSObjectProtocol] = []
-
-    public var flowIdentifier: String = ""
-    public var pathIdentifier: String = ""
 
     public private(set) var isViewFirstAppeared = true
     public private(set) var isViewAppearing = false
@@ -43,28 +34,21 @@ open class Screen:
     public private(set) var isViewPopped = false
 
     open override var prefersStatusBarHidden: Bool {
-        return statusBarHidden
+        return isStatusBarHidden
     }
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return statusBarHidden ? .fade : .none
+        return isStatusBarHidden ? .fade : .none
     }
 
-    public let configurator: ScreenConfigurable?
+    public init() {
+        super.init(nibName: nil, bundle: nil)
 
-    public init(
-        configurator: ScreenConfigurable?
-    ) {
-        self.configurator = configurator
+        disablesInteractivePopGesture = isNavigationBarHidden || hidesCloseBarItem
 
-        super.init(
-            nibName: nil,
-            bundle: nil
-        )
-
-        configureNavigationBar()
+        customizeNavigationBarAppearance()
         observeNotifications()
     }
 
@@ -77,245 +61,135 @@ open class Screen:
         unobserveNotifications()
     }
 
-    open func observeNotifications() {}
+    open func observeNotifications() { }
 
     public func observeApplicationLifeCycleNotifications() {
-        notifyWhenApplicationWillEnterForeground {
-            [unowned self] _ in
-
+        notifyWhenApplicationWillEnterForeground { [unowned self] _ in
             self.viewWillEnterForeground()
         }
-        notifyWhenApplicationDidEnterBackground {
-            [unowned self] _ in
-
+        notifyWhenApplicationDidEnterBackground { [unowned self] _ in
             self.viewDidEnterBackground()
         }
     }
 
-    open func configureNavigationBar() {
-        customizeNavigationBarTitle()
-        customizeNavigationBarLeftBarButtons()
-        customizeNavigationBarRightBarButtons()
-
-        if isViewLoaded {
-            setNeedsNavigationBarAppearanceUpdate()
-        }
+    open func customizeNavigationBarAppearance() {
+        customizeNavigationBarTitleAppearance()
+        customizeNavigationBarLeftBarItems()
+        customizeNavigationBarRightBarItems()
     }
 
-    open func customizeNavigationBarTitle() {}
-    open func customizeNavigationBarLeftBarButtons() {}
-    open func customizeNavigationBarRightBarButtons() {}
+    open func customizeNavigationBarTitleAppearance() { }
+    open func customizeNavigationBarLeftBarItems() { }
+    open func customizeNavigationBarRightBarItems() { }
 
-    open func makePopNavigationBarButtonItem() -> NavigationBarButtonItem {
-        guard let item = configurator?.makePopNavigationBarButtonItem() else {
-            mc_crash(
-                .popNavigationBarButtonItemNotFound
-            )
-        }
-
-        return item
+    open func makeDismissNavigationBarItem() -> NavigationBarItemConvertible {
+        mc_crash(.dismissNavigationBarItemNotFound)
     }
 
-    open func makeDismissNavigationBarButtonItem() -> NavigationBarButtonItem {
-        guard let item = configurator?.makeDismissNavigationBarButtonItem() else {
-            mc_crash(
-                .dismissNavigationBarButtonItemNotFound
-            )
-        }
+    open func makePopNavigationBarItem() -> NavigationBarItemConvertible {
+        mc_crash(.popNavigationBarItemNotFound)
+    }
 
-        return item
+    open func canDismiss() -> Bool {
+        return true
+    }
+
+    open func canPop() -> Bool {
+        return true
     }
 
     open func customizeAppearance() {
-        configurator?.viewCustomizeAppearance()
+        customizeViewAppearance()
     }
 
-    open func customizeViewAppearance(
-        _ style: ViewStyle
-    ) {
-        view.customizeAppearance(
-            style
-        )
-        navigationController?.view.customizeAppearance(
-            style
-        )
-    }
+    open func customizeViewAppearance() { }
 
-    open func prepareLayout() {}
-    open func updateLayoutWhenViewDidLayoutSubviews() {}
+    open func prepareLayout() { }
+    open func updateLayoutWhenViewDidLayoutSubviews() { }
 
-    open func setListeners() {}
-    open func linkInteractors() {}
+    open func setListeners() { }
+    open func linkInteractors() { }
 
-    open func bindData() {}
+    open func viewDidChangePreferredContentSizeCategory() { }
 
-    open func viewDidAttemptInteractiveDismiss() {
-        configurator?.viewDidAttemptInteractiveDismiss()
-    }
+    open func viewDidAttemptInteractiveDismiss() { }
 
     open func viewDidAppearAfterInteractiveDismiss() {
         isViewFirstAppeared = false
-
-        if let parentScreen = parent as? Screen {
-            parentScreen.viewDidAppearAfterInteractiveDismiss()
-        }
-
-        configurator?.viewDidAppearAfterInteractiveDismiss()
+        (parent as? Screen)?.viewDidAppearAfterInteractiveDismiss()
     }
 
-    /// <note>
-    /// It is expected to be called when the screen is dismissed programmatically since the
-    /// custom-presented screens doesn't call `viewWillAppear(_:)` or `viewDidAppear(_:)`. Router
-    /// mechanism will handle it automatically but for other case it should be triggerred manually.
-    open func viewDidAppearAfterDismiss() {
-        isViewFirstAppeared = false
-
-        if let parentScreen = parent as? Screen {
-            parentScreen.viewDidAppearAfterDismiss()
-        }
-
-        configurator?.viewDidAppearAfterDismiss()
-    }
-
-    open func viewDidChangePreferredUserInterfaceStyle() {
-        configurator?.viewDidChangePreferredUserInterfaceStyle()
-    }
-
-    open func viewDidChangePreferredContentSizeCategory() {
-        configurator?.viewDidChangePreferredContentSizeCategory()
-    }
-
-    open func viewWillEnterForeground() {
-        configurator?.viewWillEnterForeground()
-    }
+    open func viewWillEnterForeground() { }
 
     open func viewDidEnterBackground() {
         if isViewAppeared {
             isViewFirstAppeared = false
         }
-
-        configurator?.viewDidEnterBackground()
     }
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-
         setNeedsNavigationBarAppearanceUpdate()
         compose()
-
-        configurator?.viewDidLoad()
     }
 
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateLayoutWhenViewDidLayoutSubviews()
-
-        configurator?.viewDidLayoutSubviews()
     }
 
-    open override func viewWillAppear(
-        _ animated: Bool
-    ) {
-        super.viewWillAppear(
-            animated
-        )
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
-        setNeedsStatusBarAppearanceUpdateOnBeingAppeared()
-        setNeedsNavigationBarAppearanceUpdateOnBeingAppeared()
-
-        disablesInteractivePop = navigationBarHidden || hidesCloseBarButton
+        setNeedsStatusBarAppearanceUpdateOnAppearing()
+        setNeedsNavigationBarAppearanceUpdateOnAppearing()
 
         isViewDisappearing = false
         isViewDisappeared = false
         isViewAppearing = true
-
-        configurator?.viewWillAppear()
     }
 
-    open override func viewDidAppear(
-        _ animated: Bool
-    ) {
-        super.viewDidAppear(
-            animated
-        )
-
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         isViewAppearing = false
         isViewAppeared = true
-
-        configurator?.viewDidAppear()
     }
 
-    open override func viewWillDisappear(
-        _ animated: Bool
-    ) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        setNeedsStatusBarAppearanceUpdateOnBeingDisappeared()
+        setNeedsStatusBarAppearanceUpdateOnDisappearing()
 
         isViewFirstAppeared = false
         isViewAppeared = false
         isViewDisappearing = true
         isViewDismissed = isBeingDismissed
         isViewPopped = isMovingFromParent
-
-        configurator?.viewWillDisappear()
     }
 
-    open override func viewDidDisappear(
-        _ animated: Bool
-    ) {
-        super.viewDidDisappear(
-            animated
-        )
-
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         isViewDisappearing = false
         isViewDisappeared = true
-
-        configurator?.viewDidDisappear()
     }
 
-    open override func traitCollectionDidChange(
-        _ previousTraitCollection: UITraitCollection?
-    ) {
-        super.traitCollectionDidChange(
-            previousTraitCollection
-        )
-
-        if #available(iOS 12.0, *) {
-            if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
-                viewDidChangePreferredUserInterfaceStyle()
-            }
-        }
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
 
         if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
             viewDidChangePreferredContentSizeCategory()
         }
     }
 
-    /// <mark>
-    /// UIAdaptivePresentationControllerDelegate
-    open func presentationControllerDidDismiss(
-        _ presentationController: UIPresentationController
-    ) {
+    /// <mark> UIAdaptivePresentationControllerDelegate
+    open func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         viewDidAppearAfterInteractiveDismiss()
     }
 
-    open func presentationControllerDidAttemptToDismiss(
-        _ presentationController: UIPresentationController
-    ) {
-        guard var presentingScreen = presentingViewController else {
-            return
-        }
-
-        if let presentingNavigationContainer = presentingScreen as? UINavigationController,
-           let presentingNavigationScreen = presentingNavigationContainer.viewControllers.last {
-            presentingScreen = presentingNavigationScreen
-        }
-
-        guard let configurablePresentingScreen = presentingScreen as? Screen else {
-            return
-        }
-
-        configurablePresentingScreen.viewDidAttemptInteractiveDismiss()
+    open func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        let presentingScreen =
+            (presentationController.presentingViewController as? UINavigationController)?.viewControllers.last ??
+            presentationController.presentingViewController
+        (presentingScreen as? Screen)?.viewDidAttemptInteractiveDismiss()
     }
 }

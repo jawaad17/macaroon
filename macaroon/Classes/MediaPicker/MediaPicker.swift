@@ -73,11 +73,7 @@ open class MediaPicker: NSObject {
 
 extension MediaPicker {
     public func notifyWhenPickedPhoto(execute: @escaping (Photo) -> Void) {
-        notifierWhenPickedMedia = {
-            if let photo = $0 as? Photo {
-                execute(photo)
-            }
-        }
+        notifierWhenPickedMedia = { ($0 as? Photo).executeIfPresent(execute) }
     }
 }
 
@@ -145,6 +141,6 @@ extension MediaPicker.MediaType {
     }
 
     public func isAvailable(for sourceType: MediaPicker.SourceType) -> Bool {
-        return UIImagePickerController.availableMediaTypes(for: sourceType.asSystem()).unwrap({ $0.contains(asSystem()) }, or: false)
+        return UIImagePickerController.availableMediaTypes(for: sourceType.asSystem()).unwrap(ifPresent: { $0.contains(asSystem()) }, or: false)
     }
 }

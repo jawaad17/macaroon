@@ -4,14 +4,6 @@ import Foundation
 import UIKit
 
 extension CGSize {
-    public init(
-        _ layoutSize: LayoutSize
-    ) {
-        self.init(width: layoutSize.w, height: layoutSize.h)
-    }
-}
-
-extension CGSize {
     public static var greatestFiniteMagnitude: CGSize {
         return CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
     }
@@ -33,10 +25,6 @@ extension CGSize {
     public static func < (lhs: CGSize, rhs: CGSize) -> Bool {
         return lhs.width <= rhs.width && lhs.height <= rhs.height
     }
-
-    public static func > (lhs: CGSize, rhs: CGSize) -> Bool {
-        return lhs.width > rhs.width && lhs.height > rhs.height
-    }
 }
 
 extension CGSize {
@@ -49,11 +37,5 @@ extension CGSize {
 
     public func scaled(_ scale: CGFloat = UIScreen.main.scale) -> CGSize {
         return CGSize(width: width * scale, height: height * scale)
-    }
-}
-
-extension CGSize {
-    public var aspectRatio: CGFloat {
-        return width / height
     }
 }

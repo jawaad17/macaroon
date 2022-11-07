@@ -2,46 +2,46 @@
 
 import Foundation
 
-public protocol MultidelegationPublisher: AnyObject {
-    associatedtype SomeDelegator: Delegator
+public protocol MultiDelegationPublisher: AnyObject {
+    associatedtype SomeDelegation: Delegation
 
-    var delegators: [ObjectIdentifier: SomeDelegator] { get set }
+    var delegations: [ObjectIdentifier: SomeDelegation] { get set }
 
-    func add(delegate: SomeDelegator.Delegate)
-    func remove(delegate: SomeDelegator.Delegate)
+    func add(delegate: SomeDelegation.Delegate)
+    func remove(delegate: SomeDelegation.Delegate)
 }
 
-extension MultidelegationPublisher {
-    public func add(delegate: SomeDelegator.Delegate) {
+extension MultiDelegationPublisher {
+    public func add(delegate: SomeDelegation.Delegate) {
         if let validDelegate = delegate as? AnyObject {
             let id = ObjectIdentifier(validDelegate)
-            delegators[id] = SomeDelegator(delegate)
+            delegations[id] = SomeDelegation(delegate)
         }
     }
 
-    public func remove(delegate: SomeDelegator.Delegate) {
+    public func remove(delegate: SomeDelegation.Delegate) {
         if let validDelegate = delegate as? AnyObject {
             let id = ObjectIdentifier(validDelegate)
-            delegators[id] = nil
+            delegations[id] = nil
         }
     }
 
     public func removeAllDelegates() {
-        delegators.removeAll()
+        delegations.removeAll()
     }
 
-    public func notifyDelegates(_ notifier: (SomeDelegator.Delegate) -> Void) {
-        delegators.forEach {
+    public func notifyDelegates(_ notifier: (SomeDelegation.Delegate) -> Void) {
+        delegations.forEach {
             if let delegate = $0.value.delegate {
                 notifier(delegate)
             } else {
-                delegators[$0.key] = nil
+                delegations[$0.key] = nil
             }
         }
     }
 }
 
-public protocol Delegator {
+public protocol Delegation {
     associatedtype Delegate
 
     /// <note> It should be defined as a weak variable for no retain cycle.

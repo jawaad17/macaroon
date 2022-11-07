@@ -6,57 +6,31 @@ import UIKit
 public protocol ListComposable: UIView {
     associatedtype ContextView: ViewComposable
 
-    static var contextPaddings: LayoutPaddings { get }
-
     var contextView: ContextView { get }
 
     func getContextView() -> ContextView
-    func customizeAppearance(_ styleSheet: ContextView.StyleSheet)
-    func prepareLayout(_ layoutSheet: ContextView.LayoutSheet)
+    func customizeAppearance(_ styleGuide: ContextView.StyleGuide)
 }
 
 extension ListComposable {
-    public func customizeAppearance(
-        _ styleSheet: ContextView.StyleSheet
-    ) {
-        contextView.customizeAppearance(
-            styleSheet
-        )
-    }
-
-    public func prepareLayout(
-        _ layoutSheet: ContextView.LayoutSheet
-    ) {
-        contextView.prepareLayout(
-            layoutSheet
-        )
+    public func customizeAppearance(_ styleGuide: ContextView.StyleGuide) {
+        contextView.customizeAppearance(styleGuide)
     }
 }
 
 extension ListComposable where Self: ViewModelBindable, Self.ContextView: ViewModelBindable {
-    public func bindData(
-        _ viewModel: ContextView.ViewModel?
-    ) {
-        contextView.bindData(
-            viewModel
-        )
+    public func bind(_ viewModel: ContextView.ViewModel?) {
+        contextView.bind(viewModel)
     }
 
-    public static func calculatePreferredSize(
-        _ viewModel: ContextView.ViewModel?,
-        for layoutSheet: ContextView.ViewLayoutSheet,
-        fittingIn size: CGSize
-    ) -> CGSize {
-        let contextHorizontalPaddings = contextPaddings.leading + contextPaddings.trailing
-        let preferredSize =
-            ContextView.calculatePreferredSize(
-                viewModel,
-                for: layoutSheet,
-                fittingIn: CGSize((size.width - contextHorizontalPaddings, size.height))
-            )
-        return CGSize(
-            width: (preferredSize.width + contextHorizontalPaddings).ceil(),
-            height: (preferredSize.height + contextPaddings.top + contextPaddings.bottom).ceil()
-        )
+    public static func calculatePreferredSize(_ viewModel: ContextView.ViewModel?, fittingIn size: CGSize) -> CGSize {
+        return ContextView.calculatePreferredSize(viewModel, fittingIn: size)
+    }
+}
+
+extension ListComposable where Self: ViewModelBindable & ListSeparatorAdaptable, Self.ContextView: ViewModelBindable {
+    public static func calculatePreferredSize(_ viewModel: ContextView.ViewModel?, fittingIn size: CGSize) -> CGSize {
+        let preferredSize = ContextView.calculatePreferredSize(viewModel, fittingIn: size)
+        return CGSize(width: preferredSize.width, height: preferredSize.height + separatorStyle.margin)
     }
 }

@@ -11,10 +11,8 @@ extension UIViewController {
             if let tabBarContainer = parentContainer as? TabBarContainer {
                 return tabBarContainer
             }
-
             parentContainer = parentContainer?.parent
         }
-
         return nil
     }
 }

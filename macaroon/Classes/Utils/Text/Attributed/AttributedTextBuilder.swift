@@ -18,7 +18,7 @@ public class AttributedTextBuilder {
     }
 
     public func build() -> NSAttributedString {
-        return NSAttributedString(string: text, attributes: attributes.asSystemAttributes())
+        return NSAttributedString(string: text, attributes: attributes.convertedToSystemAttributes())
     }
 }
 
@@ -98,7 +98,7 @@ extension AttributedTextBuilder.Paragraph: ExpressibleByArrayLiteral {
 }
 
 extension Array where Element == AttributedTextBuilder.Attribute {
-    public func asSystemAttributes() -> [NSAttributedString.Key: Any] {
+    public func convertedToSystemAttributes() -> [NSAttributedString.Key: Any] {
         return reduce(into: [NSAttributedString.Key: Any]()) { systemAttributes, attribute in
             switch attribute {
             case .font(let .some(font)):

@@ -13,19 +13,6 @@ extension UIEdgeInsets {
 }
 
 extension UIEdgeInsets {
-    public init(
-        _ paddings: LayoutPaddings
-    ) {
-        self.init(
-            top: paddings.top,
-            left: paddings.leading,
-            bottom: paddings.bottom,
-            right: paddings.trailing
-        )
-    }
-}
-
-extension UIEdgeInsets {
     public func inverted() -> UIEdgeInsets {
         return multiplied(-1)
     }

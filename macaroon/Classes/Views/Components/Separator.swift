@@ -5,64 +5,47 @@ import SnapKit
 import UIKit
 
 public struct Separator {
-    public let color: UIColor
+    public let style: Styling
     public let size: CGFloat /// <note> It means width if the separator is vertical and height if the separator is horizontal.
-    public let position: Position
+    public let insets: (CGFloat, CGFloat) /// <note> It means top&bottom if the separator is vertical and left&right if the separator is vertical.
 
     public init(
-        color: Color,
-        size: CGFloat = 1,
-        position: Position = .bottom((0, 0))
+        style: Styling,
+        size: CGFloat = 1.0,
+        insets: (CGFloat, CGFloat) = (0.0, 0.0)
     ) {
-        self.color = color.color
+        self.style = style
         self.size = size
-        self.position = position
+        self.insets = insets
     }
 }
 
-extension Separator {
-    public enum Position {
-        case top(LayoutHorizontalPaddings)
-        case left(LayoutVerticalPaddings)
-        case bottom(LayoutHorizontalPaddings)
-        case right(LayoutVerticalPaddings)
-        case centerY(LayoutHorizontalPaddings)
-    }
+public enum SeparatorPosition {
+    case top
+    case left
+    case bottom
+    case right
 }
 
 extension UIView {
     /// <note> `padding` indicates the distance between separator and the edge.
     @discardableResult
-    public func addSeparator(
-        _ separator: Separator,
-        padding: LayoutMetric = 0
-    ) -> UIView {
-        let view =
-            makeSeparator(
-                for: separator
-            )
+    public func addSeparator(_ separator: Separator, at position: SeparatorPosition, padding: CGFloat = 0.0) -> UIView {
+        let view = makeView(for: separator)
 
-        addSubview(
-            view
-        )
-        view.snp.makeConstraints {
-            switch separator.position {
+        addSubview(view)
+        view.snp.makeConstraints { maker in
+            switch position {
             case .top:
-                $0.top == padding
+                maker.top.equalToSuperview().inset(padding)
             case .left:
-                $0.leading == padding
+                maker.leading.equalToSuperview().inset(padding)
             case .bottom:
-                $0.bottom == padding
+                maker.bottom.equalToSuperview().inset(padding)
             case .right:
-                $0.trailing == padding
-            case .centerY:
-                $0.centerY == padding
+                maker.trailing.equalToSuperview().inset(padding)
             }
-
-            makePositionConstraints(
-                $0,
-                for: separator
-            )
+            makeAdjustments(maker, for: separator, at: position)
         }
 
         return view
@@ -70,37 +53,22 @@ extension UIView {
 
     /// <note> `padding` indicates the distance between separator and aView's edge.
     @discardableResult
-    public func attachSeparator(
-        _ separator: Separator,
-        to aView: UIView,
-        margin: LayoutMetric = 0
-    ) -> UIView {
-        let view =
-            makeSeparator(
-                for: separator
-            )
+    public func attachSeparator(_ separator: Separator, to aView: UIView, at position: SeparatorPosition, margin: CGFloat = 0.0) -> UIView {
+        let view = makeView(for: separator)
 
-        addSubview(
-            view
-        )
-        view.snp.makeConstraints {
-            switch separator.position {
+        addSubview(view)
+        view.snp.makeConstraints { maker in
+            switch position {
             case .top:
-                $0.bottom == aView.snp.top - margin
+                maker.bottom.equalTo(aView.snp.top).offset(-margin)
             case .left:
-                $0.trailing == aView.snp.leading - margin
+                maker.trailing.equalTo(aView.snp.leading).offset(-margin)
             case .bottom:
-                $0.top == aView.snp.bottom + margin
+                maker.top.equalTo(aView.snp.bottom).offset(margin)
             case .right:
-                $0.leading == aView.snp.trailing + margin
-            case .centerY:
-                $0.centerY == aView.snp.centerY + margin
+                maker.leading.equalTo(aView.snp.trailing).offset(margin)
             }
-
-            makePositionConstraints(
-                $0,
-                for: separator
-            )
+            makeAdjustments(maker, for: separator, at: position)
         }
 
         return view
@@ -108,36 +76,24 @@ extension UIView {
 }
 
 extension UIView {
-    func makeSeparator(
-        for separator: Separator
-    ) -> UIView {
+    func makeView(for separator: Separator) -> UIView {
         let view = BaseView()
-        view.backgroundColor = separator.color
+        view.customizeBaseAppearance(separator.style)
         return view
     }
 
-    func makePositionConstraints(
-        _ maker: ConstraintMaker,
-        for separator: Separator
-    ) {
-        switch separator.position {
-        case .top(let hPaddings),
-             .bottom(let hPaddings),
-             .centerY(let hPaddings):
-            maker.leading == hPaddings.leading
-            maker.trailing == hPaddings.trailing
-
-            maker.fitToHeight(
-                separator.size
-            )
-        case .left(let vPaddings),
-             .right(let vPaddings):
-            maker.top == vPaddings.top
-            maker.bottom == vPaddings.bottom
-
-            maker.fitToWidth(
-                separator.size
-            )
+    func makeAdjustments(_ maker: ConstraintMaker, for separator: Separator, at position: SeparatorPosition) {
+        switch position {
+        case .top,
+            .bottom:
+            maker.height.equalTo(separator.size)
+            maker.leading.equalToSuperview().inset(separator.insets.0)
+            maker.trailing.equalToSuperview().inset(separator.insets.1)
+        case .left,
+             .right:
+            maker.width.equalTo(separator.size)
+            maker.top.equalToSuperview().inset(separator.insets.0)
+            maker.bottom.equalToSuperview().inset(separator.insets.1)
         }
     }
 }

@@ -5,31 +5,20 @@ import SnapKit
 import UIKit
 
 open class RemoteListScreen: ListScreen, ListDataLoaderDelegate {
-    public var reloadListWhenViewFirstDidLoad = true
     public var reloadListWhenViewDidAppear = true
     public var reloadListWhenViewWillEnterForeground = true
-    public var invalidatesLayoutForReloadingItems = false {
-        didSet { listView.invalidatesLayoutForReloadingItems = invalidatesLayoutForReloadingItems }
-    }
+    public var invalidatesLayoutForReloadingItems = false
 
     public let listDataLoader: ListDataLoader
 
     private var lastActiveDate: Date?
 
-    private var isViewFirstLoaded = false
-
     public init(
         listDataLoader: ListDataLoader & ListDataSource,
-        listLayout: ListLayout,
-        configurator: ScreenConfigurable?
+        listLayout: ListLayout
     ) {
         self.listDataLoader = listDataLoader
-
-        super.init(
-            listDataSource: listDataLoader,
-            listLayout: listLayout,
-            configurator: configurator
-        )
+        super.init(listDataSource: listDataLoader, listLayout: listLayout)
     }
 
     open override func observeNotifications() {
@@ -42,42 +31,15 @@ open class RemoteListScreen: ListScreen, ListDataLoaderDelegate {
         listDataLoader.delegate = self
     }
 
-    open override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        if view.bounds.isEmpty {
-            return
-        }
-
-        /// <note>
-        /// Some screens need the layout to be stabilized so that they can calculate the layout of
-        /// the data-driven views correctly, i.e. the layouts of the contents of the empty state view.
-        if !isViewFirstLoaded {
-            if reloadListWhenViewFirstDidLoad {
-                listDataLoader.loadList()
-            }
-
-            isViewFirstLoaded = true
-        }
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        listDataLoader.loadList()
     }
 
-    open override func viewDidAppear(
-        _ animated: Bool
-    ) {
-        super.viewDidAppear(
-            animated
-        )
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
-        if reloadListWhenViewDidAppear,
-           !isViewFirstAppeared {
-            listDataLoader.reloadList()
-        }
-    }
-
-    open override func viewDidAppearAfterInteractiveDismiss() {
-        super.viewDidAppearAfterInteractiveDismiss()
-
-        if reloadListWhenViewDidAppear {
+        if reloadListWhenViewDidAppear, !isViewFirstAppeared {
             listDataLoader.reloadList()
         }
     }
@@ -86,14 +48,12 @@ open class RemoteListScreen: ListScreen, ListDataLoaderDelegate {
         super.viewWillEnterForeground()
 
         if reloadListWhenViewWillEnterForeground {
-            if let lastActiveDate = lastActiveDate,
-               Date().timeIntervalSince(lastActiveDate) > 24 * 60 * 60 { /// <mark> 1 day
+            if let lastActiveDate = lastActiveDate, Date().timeIntervalSince(lastActiveDate) > 24 * 60 * 60 { /// <mark> 1 day
                 listDataLoader.loadList()
             } else {
                 listDataLoader.reloadList()
             }
         }
-
         lastActiveDate = nil
     }
 
@@ -105,75 +65,52 @@ open class RemoteListScreen: ListScreen, ListDataLoaderDelegate {
         }
     }
 
+    open override func viewDidAppearAfterInteractiveDismiss() {
+        super.viewDidAppearAfterInteractiveDismiss()
+
+        if reloadListWhenViewDidAppear {
+            listDataLoader.reloadList()
+        }
+    }
+
     /// <mark> ListDataLoaderDelegate
-    open func listDataLoaderWillLoadList(
-        _ dataLoader: ListDataLoader
-    ) {
-        if !listDataSource.isEmpty() {
-            return
-        }
-
-        switch listView.emptyState {
-        case .none,
-             .noNetwork,
-             .fault:
-            listView.emptyState = .loading
-        default: break
-        }
-    }
-
-    open func listDataLoader(
-        _ dataLoader: ListDataLoader,
-        didLoadList modifier: ListModifier
-    ) {
-        reloadData(
-            modifier
-        ) { [weak self] in
-
-            guard let self = self else {
-                return
+    open func listDataLoaderWillLoadList(_ dataLoader: ListDataLoader) {
+        if listDataSource.isEmpty() {
+            switch listView.emptyState {
+            case .none,
+                 .noNetwork,
+                 .fault:
+                listView.emptyState = .loading
+            default:
+                break
             }
-
-            self.listView.emptyState =
-                self.listDataSource.isEmpty()
-                ? .noContent()
-                : .none
         }
     }
 
-    open func listDataLoader(
-        _ dataLoader: ListDataLoader,
-        didFailToLoadList error: ListError
-    ) {
+    open func listDataLoader(_ dataLoader: ListDataLoader, didLoadList modifier: ListModifier) {
+        reloadList(modifier) {
+            self.listView.emptyState = self.listDataSource.isEmpty() ? .noContent() : .none
+        }
+    }
+
+    open func listDataLoader(_ dataLoader: ListDataLoader, didFailToLoadList error: ListError) {
         switch error.reason {
         case .network:
-            listDataLoader.unloadList()
+            dataLoader.unloadList()
             listView.emptyState = .noNetwork(userInfo: error.userInfo)
         default:
-            listView.emptyState =
-                listDataSource.isEmpty()
-                ? .fault(userInfo: error.userInfo)
-                : .none
+            listView.emptyState = .fault(userInfo: error.userInfo)
         }
     }
 
-    open func listDataLoaderWillLoadNextList(
-        _ dataLoader: ListDataLoader
-    ) {}
-
-    open func listDataLoader(
-        _ dataLoader: ListDataLoader,
-        didLoadNextList modifier: ListModifier
-    ) {
-        reloadData(
-            modifier
-        )
+    open func listDataLoaderWillLoadNextList(_ dataLoader: ListDataLoader) {
     }
 
-    open func listDataLoader(
-        _ dataLoader: ListDataLoader,
-        didFailToLoadNextList error: ListError
-    ) {
+    open func listDataLoader(_ dataLoader: ListDataLoader, didLoadNextList modifier: ListModifier) {
+        reloadList(modifier)
+    }
+
+    open func listDataLoader(_ dataLoader: ListDataLoader, didFailToLoadNextList error: ListError) {
         switch error.reason {
         case .network:
             dataLoader.unloadList()
@@ -183,22 +120,24 @@ open class RemoteListScreen: ListScreen, ListDataLoaderDelegate {
         }
     }
 
-    open func listDataLoaderDidUnloadList(
-        _ dataLoader: ListDataLoader
-    ) {
-        reloadData(
-            .reload
-        )
+    open func listDataLoaderWillReloadList(_ dataLoader: ListDataLoader) {
+        listDataLoaderWillLoadList(dataLoader)
+    }
+
+    open func listDataLoader(_ dataLoader: ListDataLoader, didReloadList modifier: ListModifier) {
+        listDataLoader(dataLoader, didLoadList: modifier)
+    }
+
+    open func listDataLoader(_ dataLoader: ListDataLoader, didFailToReloadList error: ListError) {
+        listDataLoader(dataLoader, didFailToLoadList: error)
+    }
+
+    open func listDataLoaderDidUnloadList(_ dataLoader: ListDataLoader) {
+        listView.reloadData()
     }
 
     /// <mark> UIScrollViewDelegate
-    open override func scrollViewDidScroll(
-        _ scrollView: UIScrollView
-    ) {
-        super.scrollViewDidScroll(
-            scrollView
-        )
-
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentHeight = scrollView.contentSize.height
         let scrollHeight = scrollView.bounds.height
 
@@ -207,5 +146,79 @@ open class RemoteListScreen: ListScreen, ListDataLoaderDelegate {
             listDataLoader.loadNextList()
             return
         }
+    }
+}
+
+extension RemoteListScreen {
+    public func reloadList(_ modifier: ListModifier, onCompleted execute: (() -> Void)? = nil) {
+        switch modifier {
+        case .none:
+            execute?()
+        case .reload:
+            listView.reloadData()
+            execute?()
+        case .update(let listSnapshot, let applyUpdates):
+            if !listSnapshot.hasUpdates {
+                execute?()
+                return
+            }
+            if !isViewAppeared {
+                listView.reloadData()
+                execute?()
+                return
+            }
+            performBatchUpdates(listSnapshot, onStarted: applyUpdates, onCompleted: execute)
+        }
+    }
+
+    public func performBatchUpdates(_ listSnapshot: ListSnapshot, onStarted executeOnStarted: (() -> Void)?, onCompleted executeOnCompleted: (() -> Void)?) {
+        if !listSnapshot.hasUpdates {
+            executeOnStarted?()
+            executeOnCompleted?()
+            return
+        }
+        let listUpdates = listSnapshot.updates
+
+        for offset in listUpdates.reloads {
+            let indexPath = IndexPath(item: offset, section: listUpdates.section)
+
+            if let cell = listView.cellForItem(at: indexPath) {
+                listLayout.configure(cell, with: listSnapshot[indexPath], at: indexPath)
+            }
+        }
+        for move in listUpdates.moves where move.isMutated {
+            let srcIndexPath = IndexPath(item: move.source, section: listUpdates.section)
+            let destIndexPath = IndexPath(item: move.destination, section: listUpdates.section)
+
+            if let cell = listView.cellForItem(at: srcIndexPath) {
+                listLayout.configure(cell, with: listSnapshot[destIndexPath], at: srcIndexPath)
+            }
+        }
+        listView.performBatchUpdates(
+            {
+                executeOnStarted?()
+
+                for offset in listUpdates.inserts {
+                    let indexPath = IndexPath(item: offset, section: listUpdates.section)
+                    listView.insertItems(at: [indexPath])
+                }
+                for offset in listUpdates.deletes {
+                    let indexPath = IndexPath(item: offset, section: listUpdates.section)
+                    listView.deleteItems(at: [indexPath])
+                }
+                for move in listUpdates.moves {
+                    let srcIndexPath = IndexPath(item: move.source, section: listUpdates.section)
+                    let destIndexPath = IndexPath(item: move.destination, section: listUpdates.section)
+                    listView.moveItem(at: srcIndexPath, to: destIndexPath)
+                }
+            },
+            completion: { _ in
+                if self.invalidatesLayoutForReloadingItems {
+                    let reloadingIndexPaths = listUpdates.reloads.map { IndexPath(item: $0, section: listUpdates.section) }
+                    self.listLayout.invalidateItems(at: reloadingIndexPaths)
+                }
+                executeOnCompleted?()
+            }
+        )
     }
 }

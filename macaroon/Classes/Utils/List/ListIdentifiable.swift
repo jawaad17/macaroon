@@ -3,15 +3,14 @@
 import Foundation
 import UIKit
 
-public protocol ListIdentifiable: UIView {
+public protocol ListIdentifiable: AnyObject {
     static var reuseIdentifier: String { get }
 }
 
-extension ListIdentifiable {
+extension ListIdentifiable where Self: UICollectionReusableView {
     public static var reuseIdentifier: String {
         return String(describing: Self.self)
     }
 }
 
 extension UICollectionReusableView: ListIdentifiable { }
-extension UICollectionViewCell: ListIdentifiable {}

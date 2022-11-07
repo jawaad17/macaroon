@@ -4,6 +4,8 @@ import Foundation
 
 public protocol NotificationObserver: AnyObject {
     var observations: [NSObjectProtocol] { get set }
+
+    func observeNotifications()
 }
 
 extension NotificationObserver {
@@ -23,24 +25,8 @@ extension NotificationObserver {
         observe(notificationWith: UIApplication.willEnterForegroundNotification, onNotified: handler)
     }
 
-    public func notifyWhenApplicationDidBecomeActive(_ handler: @escaping NotificationHandler) {
-        observe(notificationWith: UIApplication.didBecomeActiveNotification, onNotified: handler)
-    }
-
-    public func notifyWhenApplicationWillResignActive(_ handler: @escaping NotificationHandler) {
-        observe(notificationWith: UIApplication.willResignActiveNotification, onNotified: handler)
-    }
-
     public func notifyWhenApplicationDidEnterBackground(_ handler: @escaping NotificationHandler) {
         observe(notificationWith: UIApplication.didEnterBackgroundNotification, onNotified: handler)
-    }
-
-    public func notifyWhenKeyboardWillShow(_ handler: @escaping NotificationHandler) {
-        observe(notificationWith: UIResponder.keyboardWillShowNotification, onNotified: handler)
-    }
-
-    public func notifyWhenKeyboardWillHide(_ handler: @escaping NotificationHandler) {
-        observe(notificationWith: UIResponder.keyboardWillHideNotification, onNotified: handler)
     }
 
     public func unobserveNotifications() {

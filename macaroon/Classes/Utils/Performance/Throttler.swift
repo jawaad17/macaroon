@@ -10,33 +10,22 @@ public class Throttler {
     private var nextTask: DispatchWorkItem?
     private var lastTaskRuntime: Date?
 
-    private let queue: DispatchQueue
+    private lazy var queue = DispatchQueue.global(qos: .userInitiated)
 
-    public init(
-        intervalInSeconds: TimeInterval,
-        queue: DispatchQueue = DispatchQueue.global(qos: .userInitiated)
-    ) {
+    public init(intervalInSeconds: TimeInterval) {
         self.intervalInSeconds = intervalInSeconds
-        self.queue = queue
     }
 
     public func performNext(_ task: @escaping Task) {
-        cancelNext()
+        nextTask?.cancel()
 
         let newTask = DispatchWorkItem { [weak self] in
             task()
-            self?.lastTaskRuntime = nil
+            self?.lastTaskRuntime = Date()
         }
         queue.asyncAfter(deadline: DispatchTime.now() + calculateDelayInSecondsForNextTaskRuntime(), execute: newTask)
 
         nextTask = newTask
-    }
-
-    public func cancelNext() {
-        nextTask?.cancel()
-        nextTask = nil
-
-        lastTaskRuntime = Date()
     }
 
     public func cancelAll() {

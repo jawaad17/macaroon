@@ -3,14 +3,9 @@
 import Foundation
 import UIKit
 
-open class BaseView:
-    UIView,
-    BorderDrawable,
-    CornerDrawable,
-    ShadowDrawable {
+open class BaseView: UIView, ShadowDrawable {
     public var shadow: Shadow?
-
-    public private(set) lazy var shadowLayer = CAShapeLayer()
+    public var shadowLayer: CAShapeLayer?
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,23 +17,16 @@ open class BaseView:
     }
 
     open func preferredUserInterfaceStyleDidChange() {
-        drawAppearance(
-            shadow: shadow
-        )
+        if let shadow = shadow {
+            drawShadow(shadow)
+        }
     }
 
     open func preferredContentSizeCategoryDidChange() { }
 
     open override func layoutSubviews() {
         super.layoutSubviews()
-
-        guard let shadow = shadow else {
-            return
-        }
-
-        updateOnLayoutSubviews(
-            shadow: shadow
-        )
+        updateShadowWhenViewDidLayoutSubviews()
     }
 
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -49,7 +37,6 @@ open class BaseView:
                 preferredUserInterfaceStyleDidChange()
             }
         }
-
         if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
             preferredContentSizeCategoryDidChange()
         }

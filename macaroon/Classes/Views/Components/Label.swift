@@ -3,89 +3,53 @@
 import Foundation
 import UIKit
 
-open class Label:
-    UILabel,
-    BorderDrawable,
-    CornerDrawable,
-    ShadowDrawable {
-    public var contentEdgeInsets: LayoutPaddings = (0, 0, 0, 0) {
-        didSet { invalidateIntrinsicContentSize() }
+public class Label: UILabel, ShadowDrawable {
+    public var shadow: Shadow?
+    public var shadowLayer: CAShapeLayer?
+    
+    open var contentEdgeInsets: UIEdgeInsets = .zero {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
     }
 
-    public var shadow: Shadow?
-
-    public private(set) lazy var shadowLayer = CAShapeLayer()
-
-    open override func textRect(
-        forBounds bounds: CGRect,
-        limitedToNumberOfLines numberOfLines: Int
-    ) -> CGRect {
-        let textRect =
-            super.textRect(
-                forBounds: bounds.inset(
-                    by: UIEdgeInsets(contentEdgeInsets)
-                ),
-                limitedToNumberOfLines: numberOfLines
-            )
-
-        if text.isNilOrEmpty {
-            return textRect
+    open override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+        if let t = text, !t.isEmpty {
+            let textRect = super.textRect(forBounds: bounds.inset(by: contentEdgeInsets), limitedToNumberOfLines: numberOfLines)
+            return textRect.inset(by: contentEdgeInsets.inverted())
         }
-
-        return textRect.inset(
-            by: UIEdgeInsets(contentEdgeInsets).inverted()
-        )
+        return super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
     }
 
     open override func drawText(in rect: CGRect) {
-        let someRect =
-            text.isNilOrEmpty
-                ? rect
-                : rect.inset(
-                    by: UIEdgeInsets(contentEdgeInsets)
-                )
-        super.drawText(
-            in: someRect
-        )
+        if let t = text, !t.isEmpty {
+            super.drawText(in: rect.inset(by: contentEdgeInsets))
+        } else {
+            super.drawText(in: rect)
+        }
     }
     
     open func preferredUserInterfaceStyleDidChange() {
-        drawAppearance(
-            shadow: shadow
-        )
+        if let shadow = shadow {
+            drawShadow(shadow)
+        }
     }
     
     open func preferredContentSizeCategoryDidChange() { }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-
-        if bounds.isEmpty {
-            return
-        }
-
-        preferredMaxLayoutWidth = bounds.width
-
-        guard let shadow = shadow else {
-            return
-        }
-
-        updateOnLayoutSubviews(
-            shadow: shadow
-        )
+        updateShadowWhenViewDidLayoutSubviews()
     }
 
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(
-            previousTraitCollection
-        )
+        super.traitCollectionDidChange(previousTraitCollection)
 
         if #available(iOS 12.0, *) {
             if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
                 preferredUserInterfaceStyleDidChange()
             }
         }
-
         if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
             preferredContentSizeCategoryDidChange()
         }
