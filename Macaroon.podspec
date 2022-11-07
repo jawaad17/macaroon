@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name = 'Macaroon'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage = 'https://github.com/Hipo/macaroon'
   s.summary = 'iOS UIKit extension framework for providing structural interface functionality'
@@ -19,57 +19,31 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Core'
 
   s.subspec 'Banner' do |ss|
-      ss.source_files = 'macaroon/Classes/Banner/*.swift'
-
-      ss.dependency 'Macaroon/Concurrency'
-  end
-
-  s.subspec 'BottomSheet' do |ss|
-      ss.source_files = 'macaroon/Classes/BottomSheet/*.swift'
-  end
-
-  s.subspec 'BottomOverlay' do |ss|
-      ss.source_files = 'macaroon/Classes/BottomOverlay/*.swift'
-  end
-
-  s.subspec 'BarcodeScanner' do |ss|
-    ss.source_files = 'macaroon/Classes/BarcodeScanner/*.swift'
+    ss.source_files = 'macaroon/Classes/Banner/*.swift'
   end
 
   s.subspec 'Biometrics' do |ss|
     ss.source_files = 'macaroon/Classes/Biometrics/*.swift'
   end
 
-  s.subspec 'Concurrency' do |ss|
-      ss.source_files = 'macaroon/Classes/Concurrency/*.swift'
-  end
-
   s.subspec 'Core' do |ss|
-    ss.subspec 'App' do |sss|
-      sss.source_files = 'macaroon/Classes/App/*.swift'
+    ss.subspec 'Application' do |sss|
+      sss.source_files = 'macaroon/Classes/Application/*.swift'
 
-      sss.subspec 'Dependencies' do |ssss|
-          ssss.source_files = 'macaroon/Classes/App/Dependencies/*.swift'
+      sss.subspec 'Analytics' do |ssss|
+        ssss.source_files = 'macaroon/Classes/Application/Analytics/*.swift'
       end
 
-      sss.subspec 'Launching' do |ssss|
-        ssss.source_files = 'macaroon/Classes/App/Launching/*.swift'
+      sss.subspec 'Launch' do |ssss|
+        ssss.source_files = 'macaroon/Classes/Application/Launch/*.swift'
       end
 
-      sss.subspec 'Routing' do |ssss|
-        ssss.source_files = 'macaroon/Classes/App/Routing/*.swift'
-
-        ssss.subspec 'Transition' do |sssss|
-          sssss.source_files = 'macaroon/Classes/App/Routing/Transition/*.swift'
-        end
+      sss.subspec 'Route' do |ssss|
+        ssss.source_files = 'macaroon/Classes/Application/Route/*.swift'
 
         ssss.subspec 'Deeplink' do |sssss|
-            sssss.source_files = 'macaroon/Classes/App/Routing/Deeplink/*.swift'
+            sssss.source_files = 'macaroon/Classes/Application/Route/Deeplink/*.swift'
         end
-      end
-
-      sss.subspec 'Target' do |ssss|
-        ssss.source_files = 'macaroon/Classes/App/Target/*.swift'
       end
     end
 
@@ -77,20 +51,10 @@ Pod::Spec.new do |s|
       sss.source_files = 'macaroon/Classes/Error/*.swift'
     end
 
-    ss.subspec 'Managers' do |sss|
-        sss.source_files = 'macaroon/Classes/Managers/*.swift'
-
-        sss.subspec 'Loading' do |ssss|
-            ssss.source_files = 'macaroon/Classes/Managers/Loading/*.swift'
-        end
-    end
-
     ss.subspec 'Screens' do |sss|
       sss.source_files = 'macaroon/Classes/Screens/*.swift'
 
       sss.subspec 'Configuration' do |ssss|
-        ssss.source_files = 'macaroon/Classes/Screens/Configuration/*.swift'
-
         ssss.subspec 'NavigationBar' do |sssss|
           sssss.source_files = 'macaroon/Classes/Screens/Configuration/NavigationBar/*.swift'
         end
@@ -110,35 +74,11 @@ Pod::Spec.new do |s|
         ssss.subspec 'Configuration' do |sssss|
           sssss.source_files = 'macaroon/Classes/Screens/List/Configuration/*.swift'
         end
-
-        ssss.subspec 'ListLayouts' do |sssss|
-            sssss.source_files = 'macaroon/Classes/Screens/List/ListLayouts/*.swift'
-        end
-      end
-
-      sss.subspec 'CustomTransition' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Screens/CustomTransition/*.swift'
-
-          ssss.subspec 'Modal' do |sssss|
-              sssss.source_files = 'macaroon/Classes/Screens/CustomTransition/Modal/*.swift'
-          end
-      end
-
-      sss.subspec 'Other' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Screens/Other/*.swift'
       end
     end
 
     ss.subspec 'Utils' do |sss|
       sss.source_files = 'macaroon/Classes/Utils/*.swift'
-
-      sss.subspec 'DataStructures' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Utils/DataStructures/*.swift'
-      end
-
-      sss.subspec 'Debugging' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Utils/Debugging/*.swift'
-      end
 
       sss.subspec 'Extensions' do |sss|
         sss.subspec 'Foundation' do |ssss|
@@ -148,10 +88,6 @@ Pod::Spec.new do |s|
         sss.subspec 'UI' do |ssss|
           ssss.source_files = 'macaroon/Classes/Utils/Extensions/UI/*.swift'
         end
-      end
-
-      sss.subspec 'Gestures' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Utils/Gestures/*.swift'
       end
 
       sss.subspec 'Image' do |ssss|
@@ -195,6 +131,10 @@ Pod::Spec.new do |s|
           sssss.source_files = 'macaroon/Classes/Views/Components/EmptyStateView/*.swift'
         end
 
+        ssss.subspec 'MaskedTextInputView' do |sssss|
+          sssss.source_files = 'macaroon/Classes/Views/Components/MaskedTextInputView/*.swift'
+        end
+
         ssss.subspec 'SegmentedControl' do |sssss|
           sssss.source_files = 'macaroon/Classes/Views/Components/SegmentedControl/*.swift'
         end
@@ -212,20 +152,8 @@ Pod::Spec.new do |s|
         ssss.subspec 'Styling' do |sssss|
           sssss.source_files = 'macaroon/Classes/Views/Configuration/Styling/*.swift'
 
-          sssss.subspec 'Customizables' do |ssssss|
-              ssssss.source_files = 'macaroon/Classes/Views/Configuration/Styling/Customizables/*.swift'
-          end
-
-          sssss.subspec 'Drawables' do |ssssss|
-              ssssss.source_files = 'macaroon/Classes/Views/Configuration/Styling/Drawables/*.swift'
-          end
-
-          sssss.subspec 'StyleElements' do |ssssss|
-              ssssss.source_files = 'macaroon/Classes/Views/Configuration/Styling/StyleElements/*.swift'
-          end
-
-          sssss.subspec 'Styles' do |ssssss|
-              ssssss.source_files = 'macaroon/Classes/Views/Configuration/Styling/Styles/*.swift'
+          sssss.subspec 'Customization' do |ssssss|
+            ssssss.source_files = 'macaroon/Classes/Views/Configuration/Styling/Customization/*.swift'
           end
         end
       end
@@ -238,56 +166,31 @@ Pod::Spec.new do |s|
     ss.dependency 'SnapKit', '~> 5.0.0'
   end
 
-  s.subspec 'HIPCore' do |ss|
-    ss.source_files = "macaroon/Classes/HIPCore/**/*.swift"
+  s.subspec 'Core-Hipo' do |ss|
+    ss.source_files = "macaroon/Classes/Core-Hipo/*.swift"
   end
 
   s.subspec 'CustomUI' do |ss|
-      ss.source_files = "macaroon/Classes/CustomUI/*.swift"
+    ss.subspec 'FloatingPlaceholderTextInputs' do |sss|
+      sss.source_files = 'macaroon/Classes/CustomUI/FloatingPlaceholderTextInputs/*.swift'
+
+      sss.dependency 'MaterialComponents/TextControls+FilledTextFields', '~> 110.1.0'
+      sss.dependency 'MaterialComponents/TextControls+FilledTextAreas', '~> 110.1.0'
+    end
   end
 
   s.subspec 'Form' do |ss|
-    ss.subspec 'Configuration' do |sss|
-      sss.source_files = 'macaroon/Classes/Form/Configuration/*.swift'
-    end
-
-    ss.subspec 'UI' do |sss|
-      sss.source_files = 'macaroon/Classes/Form/UI/*.swift'
-
-      sss.subspec 'Screens' do |ssss|
-        ssss.source_files = 'macaroon/Classes/Form/UI/Screens/*.swift'
-      end
-
-      sss.subspec 'Views' do |ssss|
-        ssss.source_files = 'macaroon/Classes/Form/UI/Views/*.swift'
-      end
+    ss.subspec 'Screens' do |sss|
+      sss.source_files = 'macaroon/Classes/Form/Screens/*.swift'
     end
 
     ss.subspec 'Utils' do |sss|
       sss.source_files = 'macaroon/Classes/Form/Utils/*.swift'
-
-      sss.subspec 'Detector' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Form/Utils/Detector/*.swift'
-      end
-
-      sss.subspec 'Formatter' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Form/Utils/Formatter/*.swift'
-      end
-
-      sss.subspec 'Keyboard' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Form/Utils/Keyboard/*.swift'
-      end
-
-      sss.subspec 'Validator' do |ssss|
-          ssss.source_files = 'macaroon/Classes/Form/Utils/Validator/*.swift'
-      end
     end
 
-    ss.dependency 'AnyFormatKit', '~> 2.2.1'
-  end
-
-  s.subspec 'Map' do |ss|
-      ss.source_files = 'macaroon/Classes/Map/*.swift'
+    ss.subspec 'Views' do |sss|
+      sss.source_files = 'macaroon/Classes/Form/Views/*.swift'
+    end
   end
 
   s.subspec 'MediaPicker' do |ss|
@@ -298,10 +201,6 @@ Pod::Spec.new do |s|
     ss.source_files = 'macaroon/Classes/Mixpanel/*.swift'
 
     ss.dependency 'Mixpanel-swift', '~> 2.7'
-  end
-
-  s.subspec 'Vendors' do |ss|
-    ss.source_files = 'macaroon/Classes/Vendors/**/*.swift'
   end
 
   s.subspec 'PushNotification' do |ss|
@@ -316,12 +215,16 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'SwiftLint' do |ss|
-    ss.script_phase = { :name => 'Run SwiftLint', :script => 'echo "Hello"' }
     ss.dependency 'SwiftLint', '~> 0.40'
   end
 
   s.subspec 'TabBar' do |ss|
     ss.source_files = 'macaroon/Classes/TabBar/*.swift'
+  end
+
+  s.subspec 'Tryouts' do |ss|
+    ss.source_files = 'macaroon/Classes/Tryouts/*.swift'
+    ss.dependency 'Tryouts'
   end
 
   s.subspec 'URLImage' do |ss|
@@ -344,12 +247,14 @@ Pod::Spec.new do |s|
     end
 
     ss.subspec 'Views' do |sss|
-      sss.subspec 'URLImagePlaceholderView' do |ssss|
-        ssss.source_files = 'macaroon/Classes/URLImage/Views/URLImagePlaceholderView/*.swift'
+      sss.subspec 'Components' do |ssss|
+        ssss.source_files = 'macaroon/Classes/URLImage/Views/Components/*.swift'
       end
 
-      sss.subspec 'URLImageView' do |ssss|
-          ssss.source_files = 'macaroon/Classes/URLImage/Views/URLImageView/*.swift'
+      sss.subspec 'Configuration' do |ssss|
+        ssss.subspec 'Styling' do |sssss|
+          sssss.source_files = 'macaroon/Classes/URLImage/Views/Configuration/Styling/*.swift'
+        end
       end
     end
 

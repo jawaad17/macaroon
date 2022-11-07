@@ -1,53 +1,37 @@
 PODS:
-  - AnyFormatKit (2.2.1)
-  - Kingfisher (5.15.8):
-    - Kingfisher/Core (= 5.15.8)
-  - Kingfisher/Core (5.15.8)
-  - Macaroon/Banner (0.1.0):
-    - Macaroon/Concurrency
-  - Macaroon/BottomSheet (0.1.0)
-  - Macaroon/Concurrency (0.1.0)
+  - Kingfisher (5.14.0):
+    - Kingfisher/Core (= 5.14.0)
+  - Kingfisher/Core (5.14.0)
+  - Macaroon/Banner (0.1.0)
+  - Macaroon/Biometrics (0.1.0)
   - Macaroon/Core (0.1.0):
-    - Macaroon/Core/App (= 0.1.0)
+    - Macaroon/Core/Application (= 0.1.0)
     - Macaroon/Core/Error (= 0.1.0)
-    - Macaroon/Core/Managers (= 0.1.0)
     - Macaroon/Core/Screens (= 0.1.0)
     - Macaroon/Core/Utils (= 0.1.0)
     - Macaroon/Core/Views (= 0.1.0)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App (0.1.0):
-    - Macaroon/Core/App/Dependencies (= 0.1.0)
-    - Macaroon/Core/App/Launching (= 0.1.0)
-    - Macaroon/Core/App/Routing (= 0.1.0)
-    - Macaroon/Core/App/Target (= 0.1.0)
+  - Macaroon/Core-Hipo (0.1.0)
+  - Macaroon/Core/Application (0.1.0):
+    - Macaroon/Core/Application/Analytics (= 0.1.0)
+    - Macaroon/Core/Application/Launch (= 0.1.0)
+    - Macaroon/Core/Application/Route (= 0.1.0)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App/Dependencies (0.1.0):
+  - Macaroon/Core/Application/Analytics (0.1.0):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App/Launching (0.1.0):
+  - Macaroon/Core/Application/Launch (0.1.0):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App/Routing (0.1.0):
-    - Macaroon/Core/App/Routing/Deeplink (= 0.1.0)
-    - Macaroon/Core/App/Routing/Transition (= 0.1.0)
+  - Macaroon/Core/Application/Route (0.1.0):
+    - Macaroon/Core/Application/Route/Deeplink (= 0.1.0)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App/Routing/Deeplink (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App/Routing/Transition (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/App/Target (0.1.0):
+  - Macaroon/Core/Application/Route/Deeplink (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Error (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Managers (0.1.0):
-    - Macaroon/Core/Managers/Loading (= 0.1.0)
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Managers/Loading (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Screens (0.1.0):
     - Macaroon/Core/Screens/Configuration (= 0.1.0)
     - Macaroon/Core/Screens/Containers (= 0.1.0)
-    - Macaroon/Core/Screens/CustomTransition (= 0.1.0)
     - Macaroon/Core/Screens/List (= 0.1.0)
-    - Macaroon/Core/Screens/Other (= 0.1.0)
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Screens/Configuration (0.1.0):
     - Macaroon/Core/Screens/Configuration/NavigationBar (= 0.1.0)
@@ -59,36 +43,19 @@ PODS:
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Screens/Containers (0.1.0):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/CustomTransition (0.1.0):
-    - Macaroon/Core/Screens/CustomTransition/Modal (= 0.1.0)
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/CustomTransition/Modal (0.1.0):
-    - SnapKit (~> 5.0.0)
   - Macaroon/Core/Screens/List (0.1.0):
     - Macaroon/Core/Screens/List/Configuration (= 0.1.0)
-    - Macaroon/Core/Screens/List/ListLayouts (= 0.1.0)
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Screens/List/Configuration (0.1.0):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/List/ListLayouts (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/Other (0.1.0):
-    - SnapKit (~> 5.0.0)
   - Macaroon/Core/Utils (0.1.0):
-    - Macaroon/Core/Utils/DataStructures (= 0.1.0)
-    - Macaroon/Core/Utils/Debugging (= 0.1.0)
     - Macaroon/Core/Utils/Extensions (= 0.1.0)
-    - Macaroon/Core/Utils/Gestures (= 0.1.0)
     - Macaroon/Core/Utils/Image (= 0.1.0)
     - Macaroon/Core/Utils/List (= 0.1.0)
     - Macaroon/Core/Utils/Notification (= 0.1.0)
     - Macaroon/Core/Utils/Performance (= 0.1.0)
     - Macaroon/Core/Utils/Text (= 0.1.0)
     - Macaroon/Core/Utils/Time (= 0.1.0)
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/DataStructures (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Debugging (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Utils/Extensions (0.1.0):
     - Macaroon/Core/Utils/Extensions/Foundation (= 0.1.0)
@@ -97,8 +64,6 @@ PODS:
   - Macaroon/Core/Utils/Extensions/Foundation (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Utils/Extensions/UI (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Gestures (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Utils/Image (0.1.0):
     - SnapKit (~> 5.0.0)
@@ -125,9 +90,12 @@ PODS:
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Views/Components (0.1.0):
     - Macaroon/Core/Views/Components/EmptyStateView (= 0.1.0)
+    - Macaroon/Core/Views/Components/MaskedTextInputView (= 0.1.0)
     - Macaroon/Core/Views/Components/SegmentedControl (= 0.1.0)
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Views/Components/EmptyStateView (0.1.0):
+    - SnapKit (~> 5.0.0)
+  - Macaroon/Core/Views/Components/MaskedTextInputView (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Views/Components/SegmentedControl (0.1.0):
     - SnapKit (~> 5.0.0)
@@ -141,55 +109,34 @@ PODS:
   - Macaroon/Core/Views/Configuration/Layout (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Views/Configuration/Styling (0.1.0):
-    - Macaroon/Core/Views/Configuration/Styling/Customizables (= 0.1.0)
-    - Macaroon/Core/Views/Configuration/Styling/Drawables (= 0.1.0)
-    - Macaroon/Core/Views/Configuration/Styling/StyleElements (= 0.1.0)
-    - Macaroon/Core/Views/Configuration/Styling/Styles (= 0.1.0)
+    - Macaroon/Core/Views/Configuration/Styling/Customization (= 0.1.0)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Styling/Customizables (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Styling/Drawables (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Styling/StyleElements (0.1.0):
-    - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Styling/Styles (0.1.0):
+  - Macaroon/Core/Views/Configuration/Styling/Customization (0.1.0):
     - SnapKit (~> 5.0.0)
   - Macaroon/Core/Views/ListComponents (0.1.0):
     - SnapKit (~> 5.0.0)
+  - Macaroon/CustomUI/FloatingPlaceholderTextInputs (0.1.0):
+    - "MaterialComponents/TextControls+FilledTextAreas (~> 110.1.0)"
+    - "MaterialComponents/TextControls+FilledTextFields (~> 110.1.0)"
   - Macaroon/Form (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-    - Macaroon/Form/Configuration (= 0.1.0)
-    - Macaroon/Form/UI (= 0.1.0)
+    - Macaroon/Form/Screens (= 0.1.0)
     - Macaroon/Form/Utils (= 0.1.0)
-  - Macaroon/Form/Configuration (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/Form/UI (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-    - Macaroon/Form/UI/Screens (= 0.1.0)
-    - Macaroon/Form/UI/Views (= 0.1.0)
-  - Macaroon/Form/UI/Screens (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/Form/UI/Views (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/Form/Utils (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-    - Macaroon/Form/Utils/Detector (= 0.1.0)
-    - Macaroon/Form/Utils/Formatter (= 0.1.0)
-    - Macaroon/Form/Utils/Keyboard (= 0.1.0)
-    - Macaroon/Form/Utils/Validator (= 0.1.0)
-  - Macaroon/Form/Utils/Detector (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/Form/Utils/Formatter (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/Form/Utils/Keyboard (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/Form/Utils/Validator (0.1.0):
-    - AnyFormatKit (~> 2.2.1)
-  - Macaroon/HIPCore (0.1.0)
+    - Macaroon/Form/Views (= 0.1.0)
+  - Macaroon/Form/Screens (0.1.0)
+  - Macaroon/Form/Utils (0.1.0)
+  - Macaroon/Form/Views (0.1.0)
   - Macaroon/MediaPicker (0.1.0)
+  - Macaroon/Mixpanel (0.1.0):
+    - Mixpanel-swift (~> 2.7)
+  - Macaroon/PushNotification (0.1.0)
+  - Macaroon/SVGImage (0.1.0):
+    - Macaroon/URLImage
+    - Macaw (= 0.9.7)
   - Macaroon/SwiftLint (0.1.0):
     - SwiftLint (~> 0.40)
   - Macaroon/TabBar (0.1.0)
+  - Macaroon/Tryouts (0.1.0):
+    - Tryouts
   - Macaroon/URLImage (0.1.0):
     - Kingfisher (~> 5.0)
     - Macaroon/URLImage/Utils (= 0.1.0)
@@ -207,46 +154,139 @@ PODS:
     - Kingfisher (~> 5.0)
   - Macaroon/URLImage/Views (0.1.0):
     - Kingfisher (~> 5.0)
-    - Macaroon/URLImage/Views/URLImagePlaceholderView (= 0.1.0)
-    - Macaroon/URLImage/Views/URLImageView (= 0.1.0)
-  - Macaroon/URLImage/Views/URLImagePlaceholderView (0.1.0):
+    - Macaroon/URLImage/Views/Components (= 0.1.0)
+    - Macaroon/URLImage/Views/Configuration (= 0.1.0)
+  - Macaroon/URLImage/Views/Components (0.1.0):
     - Kingfisher (~> 5.0)
-  - Macaroon/URLImage/Views/URLImageView (0.1.0):
+  - Macaroon/URLImage/Views/Configuration (0.1.0):
     - Kingfisher (~> 5.0)
-  - Macaroon/Vendors (0.1.0)
+    - Macaroon/URLImage/Views/Configuration/Styling (= 0.1.0)
+  - Macaroon/URLImage/Views/Configuration/Styling (0.1.0):
+    - Kingfisher (~> 5.0)
+  - Macaroon/Zendesk-Chat (0.1.0):
+    - ZendeskChatSDK (~> 2.9)
+  - Macaw (0.9.7):
+    - SWXMLHash
+  - MaterialComponents/AnimationTiming (110.1.0)
+  - MaterialComponents/Availability (110.1.0)
+  - MaterialComponents/private/Math (110.1.0)
+  - "MaterialComponents/private/TextControlsPrivate+BaseStyle (110.1.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/private/TextControlsPrivate+FilledStyle (110.1.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+    - "MaterialComponents/private/TextControlsPrivate+UnderlinedStyle"
+  - "MaterialComponents/private/TextControlsPrivate+Shared (110.1.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - "MaterialComponents/TextControls+Enums"
+  - "MaterialComponents/private/TextControlsPrivate+TextFields (110.1.0)":
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/private/TextControlsPrivate+UnderlinedStyle (110.1.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/TextControls+BaseTextAreas (110.1.0)":
+    - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+    - MDFInternationalization
+  - "MaterialComponents/TextControls+BaseTextFields (110.1.0)":
+    - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+    - "MaterialComponents/private/TextControlsPrivate+TextFields"
+    - MDFInternationalization
+  - "MaterialComponents/TextControls+Enums (110.1.0)"
+  - "MaterialComponents/TextControls+FilledTextAreas (110.1.0)":
+    - MaterialComponents/Availability
+    - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
+    - "MaterialComponents/TextControls+BaseTextAreas"
+  - "MaterialComponents/TextControls+FilledTextFields (110.1.0)":
+    - MaterialComponents/Availability
+    - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
+    - "MaterialComponents/TextControls+BaseTextFields"
+  - MDFInternationalization (2.0.0)
+  - Mixpanel-swift (2.7.7):
+    - Mixpanel-swift/Complete (= 2.7.7)
+  - Mixpanel-swift/Complete (2.7.7)
   - SnapKit (5.0.1)
-  - SwiftLint (0.42.0)
+  - SwiftLint (0.40.3)
+  - SWXMLHash (5.0.1)
+  - Tryouts (0.2.1)
+  - ZendeskChatProvidersSDK (2.9.0)
+  - ZendeskChatSDK (2.9.0):
+    - ZendeskChatProvidersSDK (~> 2.9.0)
+    - ZendeskMessagingSDK (~> 3.8.0)
+  - ZendeskCommonUISDK (6.0.0):
+    - ZendeskSDKConfigurationsSDK (~> 1.1.6)
+  - ZendeskMessagingAPISDK (3.8.0):
+    - ZendeskSDKConfigurationsSDK (~> 1.1.6)
+  - ZendeskMessagingSDK (3.8.0):
+    - ZendeskCommonUISDK (~> 6.0.0)
+    - ZendeskMessagingAPISDK (~> 3.8.0)
+  - ZendeskSDKConfigurationsSDK (1.1.6)
 
 DEPENDENCIES:
   - Macaroon/Banner (from `../`)
-  - Macaroon/BottomSheet (from `../`)
+  - Macaroon/Biometrics (from `../`)
   - Macaroon/Core (from `../`)
+  - Macaroon/Core-Hipo (from `../`)
+  - Macaroon/CustomUI/FloatingPlaceholderTextInputs (from `../`)
   - Macaroon/Form (from `../`)
-  - Macaroon/HIPCore (from `../`)
   - Macaroon/MediaPicker (from `../`)
+  - Macaroon/Mixpanel (from `../`)
+  - Macaroon/PushNotification (from `../`)
+  - Macaroon/SVGImage (from `../`)
   - Macaroon/SwiftLint (from `../`)
   - Macaroon/TabBar (from `../`)
-  - Macaroon/URLImage (from `../`)
-  - Macaroon/Vendors (from `../`)
+  - Macaroon/Tryouts (from `../`)
+  - Macaroon/Zendesk-Chat (from `../`)
 
 SPEC REPOS:
   trunk:
-    - AnyFormatKit
     - Kingfisher
+    - Macaw
+    - MaterialComponents
+    - MDFInternationalization
+    - Mixpanel-swift
     - SnapKit
     - SwiftLint
+    - SWXMLHash
+    - Tryouts
+    - ZendeskChatProvidersSDK
+    - ZendeskChatSDK
+    - ZendeskCommonUISDK
+    - ZendeskMessagingAPISDK
+    - ZendeskMessagingSDK
+    - ZendeskSDKConfigurationsSDK
 
 EXTERNAL SOURCES:
   Macaroon:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnyFormatKit: a433c9051897ec3af3aa77172c443d08660419ca
-  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
-  Macaroon: 5e8220d5d4ffa688323046b492b1e83d3433107d
+  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
+  Macaroon: 3efee0944109b5a97589ba9a46ebb060e68dfc14
+  Macaw: 4a931baf9a9826b06d0d8ecf300014c962ab9d50
+  MaterialComponents: 4cb6659322cfc38bb0a7e40fba1866daaefeb12c
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  Mixpanel-swift: 3a8fb9ce791e9c64d556b9446aa470b469c6fa7d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
+  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
+  SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
+  Tryouts: dabd03aa73c2b5d253a649d306df523fc090fcee
+  ZendeskChatProvidersSDK: dd8cbf33c4b7209a8ee7945faa4d2cd3b609ff15
+  ZendeskChatSDK: 942bad4d4d5ec0c40fbd6d2690c1cc2e8c24d879
+  ZendeskCommonUISDK: f496b95e2cb728bd5729fe022f400cf1dedda00b
+  ZendeskMessagingAPISDK: e315a6ad7a9b6cae9e52d946df4aa8a7727abdf5
+  ZendeskMessagingSDK: 774d88bec0671d58ae51c9964d4c4f9bb4142095
+  ZendeskSDKConfigurationsSDK: 2fa9413915db85c993f58ad8f7902bea0b6090a5
 
-PODFILE CHECKSUM: 745c236666689ea23c0a15de746a8e5c155e244a
+PODFILE CHECKSUM: 681680b63b4a0cb94ef7dc64a4953fceed96deb8
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.3
