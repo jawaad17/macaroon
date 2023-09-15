@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52B0672AF174752CC7677878 /* Pods_macaroon_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2F2D799D090D8B1377872A /* Pods_macaroon_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		E015EBCA570C9BD74AB8A39D /* Pods_macaroon_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 823B12C71DCC1FD591D9142B /* Pods_macaroon_Tests.framework */; };
+		7B30A17B86A83D9F481D1778 /* Pods_macaroon_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D3DC99C9C6DE5B97D8F2967 /* Pods_macaroon_Example.framework */; };
+		8E6620DCD4E62F7587B339D9 /* Pods_macaroon_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5FB298FB97DF6A781E733 /* Pods_macaroon_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +29,11 @@
 
 /* Begin PBXFileReference section */
 		02AC15F8D7A29D938B578F4C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		0973A255BC1681AE8E1D3D60 /* Pods-macaroon_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Tests.release.xcconfig"; path = "Target Support Files/Pods-macaroon_Tests/Pods-macaroon_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		0D3DC99C9C6DE5B97D8F2967 /* Pods_macaroon_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macaroon_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FB1293CF6AEDC3090EA6AAF /* Macaroon.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Macaroon.podspec; path = ../Macaroon.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		220823A1EA2628CDB9F3C811 /* Pods-macaroon_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Example.debug.xcconfig"; path = "Target Support Files/Pods-macaroon_Example/Pods-macaroon_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		3ABD621F827812211987890D /* Pods-macaroon_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Example.debug.xcconfig"; path = "Target Support Files/Pods-macaroon_Example/Pods-macaroon_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		4299AE47D67DB24CBA16E52B /* Pods-macaroon_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Example.release.xcconfig"; path = "Target Support Files/Pods-macaroon_Example/Pods-macaroon_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* macaroon_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macaroon_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,12 +44,9 @@
 		607FACE51AFB9204008FA782 /* macaroon_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macaroon_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		76B5FB298FB97DF6A781E733 /* Pods_macaroon_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macaroon_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7919018335BC709D90F969B2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		815929825159DA665443D4F5 /* Pods-macaroon_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Example.release.xcconfig"; path = "Target Support Files/Pods-macaroon_Example/Pods-macaroon_Example.release.xcconfig"; sourceTree = "<group>"; };
-		823B12C71DCC1FD591D9142B /* Pods_macaroon_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macaroon_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1FA8C2661342B550E12BBF1 /* Pods-macaroon_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Tests.release.xcconfig"; path = "Target Support Files/Pods-macaroon_Tests/Pods-macaroon_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		C650B4109B8C1B80AB01A8AD /* Pods-macaroon_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Tests.debug.xcconfig"; path = "Target Support Files/Pods-macaroon_Tests/Pods-macaroon_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		CA2F2D799D090D8B1377872A /* Pods_macaroon_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macaroon_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97E6C60E68468882E78E395B /* Pods-macaroon_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macaroon_Tests.debug.xcconfig"; path = "Target Support Files/Pods-macaroon_Tests/Pods-macaroon_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B0672AF174752CC7677878 /* Pods_macaroon_Example.framework in Frameworks */,
+				7B30A17B86A83D9F481D1778 /* Pods_macaroon_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,29 +62,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E015EBCA570C9BD74AB8A39D /* Pods_macaroon_Tests.framework in Frameworks */,
+				8E6620DCD4E62F7587B339D9 /* Pods_macaroon_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D06FF193AB4C08C63D4D2FE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CA2F2D799D090D8B1377872A /* Pods_macaroon_Example.framework */,
-				823B12C71DCC1FD591D9142B /* Pods_macaroon_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3EE6442CC897A2E1EE7D35C2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				220823A1EA2628CDB9F3C811 /* Pods-macaroon_Example.debug.xcconfig */,
-				815929825159DA665443D4F5 /* Pods-macaroon_Example.release.xcconfig */,
-				C650B4109B8C1B80AB01A8AD /* Pods-macaroon_Tests.debug.xcconfig */,
-				B1FA8C2661342B550E12BBF1 /* Pods-macaroon_Tests.release.xcconfig */,
+				3ABD621F827812211987890D /* Pods-macaroon_Example.debug.xcconfig */,
+				4299AE47D67DB24CBA16E52B /* Pods-macaroon_Example.release.xcconfig */,
+				97E6C60E68468882E78E395B /* Pods-macaroon_Tests.debug.xcconfig */,
+				0973A255BC1681AE8E1D3D60 /* Pods-macaroon_Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -97,7 +88,7 @@
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				3EE6442CC897A2E1EE7D35C2 /* Pods */,
-				3D06FF193AB4C08C63D4D2FE /* Frameworks */,
+				FF264215D0526CFC1ACC7C81 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +150,15 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		FF264215D0526CFC1ACC7C81 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D3DC99C9C6DE5B97D8F2967 /* Pods_macaroon_Example.framework */,
+				76B5FB298FB97DF6A781E733 /* Pods_macaroon_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -166,11 +166,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "macaroon_Example" */;
 			buildPhases = (
-				9A2782E6807945C24F000F5A /* [CP] Check Pods Manifest.lock */,
+				B5285867F60988BAD84B5547 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				DDB0F8ECA71C7A3022302B2E /* [CP] Embed Pods Frameworks */,
+				808F197DF97C54448CF4F874 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,7 +185,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "macaroon_Tests" */;
 			buildPhases = (
-				59982434C6D2E07FCB2FA976 /* [CP] Check Pods Manifest.lock */,
+				7CB998B648EE28802A7E708B /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -263,7 +263,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		59982434C6D2E07FCB2FA976 /* [CP] Check Pods Manifest.lock */ = {
+		7CB998B648EE28802A7E708B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -285,29 +285,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9A2782E6807945C24F000F5A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-macaroon_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DDB0F8ECA71C7A3022302B2E /* [CP] Embed Pods Frameworks */ = {
+		808F197DF97C54448CF4F874 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,7 +307,6 @@
 				"${PODS_ROOT}/ZendeskMessagingAPISDK/MessagingAPI.framework",
 				"${PODS_ROOT}/ZendeskMessagingSDK/MessagingSDK.framework",
 				"${PODS_ROOT}/ZendeskSDKConfigurationsSDK/SDKConfigurations.framework",
-				"${PODS_ROOT}/ZendeskSDKConfigurationsSDK/SDKConfigurations.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -348,11 +325,32 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessagingAPI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessagingSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDKConfigurations.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/SDKConfigurations.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macaroon_Example/Pods-macaroon_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5285867F60988BAD84B5547 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macaroon_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -514,11 +512,12 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 220823A1EA2628CDB9F3C811 /* Pods-macaroon_Example.debug.xcconfig */;
+			baseConfigurationReference = 3ABD621F827812211987890D /* Pods-macaroon_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78TL78Z7WM;
 				INFOPLIST_FILE = macaroon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -530,11 +529,12 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 815929825159DA665443D4F5 /* Pods-macaroon_Example.release.xcconfig */;
+			baseConfigurationReference = 4299AE47D67DB24CBA16E52B /* Pods-macaroon_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78TL78Z7WM;
 				INFOPLIST_FILE = macaroon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -546,7 +546,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C650B4109B8C1B80AB01A8AD /* Pods-macaroon_Tests.debug.xcconfig */;
+			baseConfigurationReference = 97E6C60E68468882E78E395B /* Pods-macaroon_Tests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 78TL78Z7WM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -558,6 +558,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -569,7 +570,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1FA8C2661342B550E12BBF1 /* Pods-macaroon_Tests.release.xcconfig */;
+			baseConfigurationReference = 0973A255BC1681AE8E1D3D60 /* Pods-macaroon_Tests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 78TL78Z7WM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -577,6 +578,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

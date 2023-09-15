@@ -46,6 +46,10 @@ extension BiometricsController {
                 method = .faceID
             case .touchID:
                 method = .touchID
+            case .opticID:
+                method = .other
+            @unknown default:
+                method = .other
             }
         } else {
             status = .unavailable
