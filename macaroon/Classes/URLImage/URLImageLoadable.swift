@@ -9,6 +9,7 @@ public protocol URLImageLoadable: ImageLoadable {
 }
 
 extension URLImageLoadable {
+    @MainActor
     public func load(from source: ImageSource?, onCompleted execute: ((ErrorConvertible?) -> Void)? = nil) {
         guard let source = source else {
             unloadSource()
@@ -22,6 +23,7 @@ extension URLImageLoadable {
         }
     }
 
+    @MainActor
     public func unloadSource() {
         imageContainer.kf.cancelDownloadTask()
         imageContainer.image = nil

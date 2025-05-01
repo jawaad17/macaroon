@@ -253,7 +253,7 @@ Pod::Spec.new do |s|
       end
     end
 
-    ss.dependency 'Kingfisher', '~> 5.0'
+    ss.dependency 'Kingfisher', '~> 8.3.2'
     ss.dependency 'SWXMLHash', '~> 5.0.1'
   end
 

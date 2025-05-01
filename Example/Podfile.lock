@@ -1,7 +1,5 @@
 PODS:
-  - Kingfisher (5.15.8):
-    - Kingfisher/Core (= 5.15.8)
-  - Kingfisher/Core (5.15.8)
+  - Kingfisher (8.3.2)
   - Macaroon/Banner (1.1.5)
   - Macaroon/Biometrics (1.1.5)
   - Macaroon/Core (1.1.5):
@@ -136,39 +134,39 @@ PODS:
     - SwiftLint (~> 0.59.1)
   - Macaroon/TabBar (1.1.5)
   - Macaroon/URLImage (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - Macaroon/URLImage/Utils (= 1.1.5)
     - Macaroon/URLImage/ViewModels (= 1.1.5)
     - Macaroon/URLImage/Views (= 1.1.5)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Utils (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - Macaroon/URLImage/Utils/Extensions (= 1.1.5)
     - Macaroon/URLImage/Utils/Properties (= 1.1.5)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Utils/Extensions (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Utils/Properties (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/ViewModels (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Views (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - Macaroon/URLImage/Views/Components (= 1.1.5)
     - Macaroon/URLImage/Views/Configuration (= 1.1.5)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Views/Components (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Views/Configuration (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - Macaroon/URLImage/Views/Configuration/Styling (= 1.1.5)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/URLImage/Views/Configuration/Styling (1.1.5):
-    - Kingfisher (~> 5.0)
+    - Kingfisher (~> 8.3.2)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/Zendesk-Chat (1.1.5):
     - ZendeskChatSDK (~> 3.0.0)
@@ -273,8 +271,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
-  Macaroon: c1e4e8820d7e8ae1fc0faf762b68b73d9449be37
+  Kingfisher: 0621d0ac0c78fecb19f6dc5303bde2b52abaf2f5
+  Macaroon: e544ca52dde6087eff75b5456aeb7d0584ed8596
   Macaw: 4a931baf9a9826b06d0d8ecf300014c962ab9d50
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
@@ -289,6 +287,6 @@ SPEC CHECKSUMS:
   ZendeskMessagingSDK: 4f5f3d43766bb3b2ea6411d1331cfe609ff33618
   ZendeskSDKConfigurationsSDK: a5c21010e17b71d02bc2cfe73dcc9da1efa0a7b2
 
-PODFILE CHECKSUM: 7e3e4e003219ec06356231ddb1b992a728bd72a3
+PODFILE CHECKSUM: ea2d3fb2b73fad9ca66e87d00b421f09b620a621
 
 COCOAPODS: 1.16.2

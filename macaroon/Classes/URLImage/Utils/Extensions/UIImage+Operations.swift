@@ -22,7 +22,7 @@ extension UIImage {
 
     public func rounded(_ radius: CGFloat, _ size: CGSize? = nil, _ corners: RectCorner = .all, _ scale: CGFloat = UIScreen.main.scale) -> UIImage? {
         let processor = RoundCornerImageProcessor(cornerRadius: radius.scaled(scale), targetSize: size?.scaled(scale), roundingCorners: corners)
-        return processor.process(item: .image(self), options: [])
+        return processor.process(item: .image(self), options: KingfisherParsedOptionsInfo([]))
     }
 
     public func resized(_ newSize: CGSize?, _ mode: ContentMode, _ scale: CGFloat = UIScreen.main.scale) -> UIImage? {
@@ -32,7 +32,7 @@ extension UIImage {
             return self
         }
         let processor = ResizingImageProcessor(referenceSize: size, mode: mode)
-        return processor.process(item: .image(self), options: [])
+        return processor.process(item: .image(self), options: KingfisherParsedOptionsInfo([]))
     }
 
     public func downsampled(_ newSize: CGSize?, _ scale: CGFloat = UIScreen.main.scale) -> UIImage? {
@@ -42,7 +42,7 @@ extension UIImage {
             return self
         }
         let processor = DownsamplingImageProcessor(size: size)
-        return processor.process(item: .image(self), options: [])
+        return processor.process(item: .image(self), options: KingfisherParsedOptionsInfo([]))
     }
 
     public func cropped(_ size: CGSize?, at anchor: CGPoint = .init(x: 0.5, y: 0.5), _ scale: CGFloat = 1.0) -> UIImage? {
@@ -52,7 +52,7 @@ extension UIImage {
             return self
         }
         let processor = CroppingImageProcessor(size: size , anchor: anchor)
-        return processor.process(item: .image(self), options: [])
+        return processor.process(item: .image(self), options: KingfisherParsedOptionsInfo([]))
     }
 }
 

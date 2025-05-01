@@ -1,6 +1,7 @@
 // Copyright © 2019 hipolabs. All rights reserved.
 
 import Foundation
+import UIKit
 import Kingfisher
 
 public protocol URLImageSource: ImageSource {
@@ -19,6 +20,7 @@ extension URLImageSource {
         load(in: imageView, displayingPlaceholderIn: nil, onCompleted: execute)
     }
 
+    @MainActor
     public func load(in imageView: UIImageView, displayingPlaceholderIn placeholderContainer: URLImagePlaceholderContainer?, onCompleted execute: ((ErrorConvertible?) -> Void)? = nil) {
         imageView.kf.cancelDownloadTask()
         imageView.kf.setImage(with: url, placeholder: placeholderContainer, options: formOptions(), progressBlock: nil) { result in
