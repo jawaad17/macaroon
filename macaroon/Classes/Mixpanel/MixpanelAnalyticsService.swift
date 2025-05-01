@@ -56,7 +56,7 @@ extension MixpanelAnalyticsService {
     private func initialize() {
         if !config.isValid { return }
 
-        Mixpanel.initialize(token: config.apiToken)
+        Mixpanel.initialize(token: config.apiToken, trackAutomaticEvents: true)
 
         debug {
             Mixpanel.mainInstance().loggingEnabled = true

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name = 'Macaroon'
-  s.version = '1.1.4'
+  s.version = '1.1.5'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage = 'https://github.com/jawaad17/macaroon'
   s.summary = 'iOS UIKit extension framework for providing structural interface functionality'
@@ -200,7 +200,7 @@ Pod::Spec.new do |s|
   s.subspec 'Mixpanel' do |ss|
     ss.source_files = 'macaroon/Classes/Mixpanel/*.swift'
 
-    ss.dependency 'Mixpanel-swift', '~> 2.7'
+    ss.dependency 'Mixpanel-swift', '~> 5.0.0'
   end
 
   s.subspec 'PushNotification' do |ss|
@@ -215,7 +215,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'SwiftLint' do |ss|
-    ss.dependency 'SwiftLint', '~> 0.40'
+    ss.dependency 'SwiftLint', '~> 0.59.1'
   end
 
   s.subspec 'TabBar' do |ss|
