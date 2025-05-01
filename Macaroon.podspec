@@ -174,8 +174,8 @@ Pod::Spec.new do |s|
     ss.subspec 'FloatingPlaceholderTextInputs' do |sss|
       sss.source_files = 'macaroon/Classes/CustomUI/FloatingPlaceholderTextInputs/*.swift'
 
-      sss.dependency 'MaterialComponents/TextControls+FilledTextFields', '~> 110.1.0'
-      sss.dependency 'MaterialComponents/TextControls+FilledTextAreas', '~> 110.1.0'
+      sss.dependency 'MaterialComponents/TextControls+FilledTextFields', '~> 124.2.0'
+      sss.dependency 'MaterialComponents/TextControls+FilledTextAreas', '~> 124.2.0'
     end
   end
 

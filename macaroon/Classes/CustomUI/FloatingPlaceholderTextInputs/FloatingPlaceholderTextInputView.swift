@@ -94,13 +94,11 @@ extension FloatingPlaceholderTextInputView {
 
         textInputView.customizeBaseAppearance(style)
 
-        textInputView.setFilledBackgroundColor(.clear, for: .normal)
-        textInputView.setFilledBackgroundColor(.clear, for: .editing)
-        textInputView.setFilledBackgroundColor(.clear, for: .disabled)
+        textInputView.backgroundColor = UIColor.clear
         textInputView.setUnderlineColor(.clear, for: .normal)
         textInputView.setUnderlineColor(.clear, for: .editing)
         textInputView.setUnderlineColor(.clear, for: .disabled)
-
+        
         if let background = style.background?.normal {
             textInputView.background = background
         }
@@ -112,15 +110,13 @@ extension FloatingPlaceholderTextInputView {
             textInputView.adjustsFontForContentSizeCategory = font.adjustsFontForContentSizeCategory
         }
         if let normalTextColor = style.textColor?.normal {
-            textInputView.setTextColor(normalTextColor, for: .normal)
-            textInputView.setTextColor(normalTextColor, for: .editing)
-            textInputView.setTextColor(normalTextColor, for: .disabled)
+            textInputView.textColor = normalTextColor
         }
         if let selectedTextColor = style.textColor?.selected {
-            textInputView.setTextColor(selectedTextColor, for: .editing)
+            textInputView.textColor = selectedTextColor
         }
         if let disabledTextColor = style.textColor?.disabled {
-            textInputView.setTextColor(disabledTextColor, for: .disabled)
+            textInputView.textColor = disabledTextColor
         }
         if let placeholderText = style.placeholderText {
             switch placeholderText {
@@ -128,21 +124,16 @@ extension FloatingPlaceholderTextInputView {
                 textInputView.label.text = text
 
                 if let normalPlaceholderColor = style.placeholderColor?.normal {
-                    textInputView.setNormalLabelColor(normalPlaceholderColor, for: .normal)
-                    textInputView.setNormalLabelColor(normalPlaceholderColor, for: .editing)
-                    textInputView.setNormalLabelColor(normalPlaceholderColor, for: .disabled)
-
-                    textInputView.setFloatingLabelColor(normalPlaceholderColor, for: .normal)
-                    textInputView.setFloatingLabelColor(normalPlaceholderColor, for: .editing)
-                    textInputView.setFloatingLabelColor(normalPlaceholderColor, for: .disabled)
+                    textInputView.label.textColor = normalPlaceholderColor
+                    textInputView.label.textColor = normalPlaceholderColor
                 }
                 if let selectedPlaceholderColor = style.placeholderColor?.selected {
-                    textInputView.setNormalLabelColor(selectedPlaceholderColor, for: .editing)
-                    textInputView.setFloatingLabelColor(selectedPlaceholderColor, for: .editing)
+                    textInputView.label.textColor = selectedPlaceholderColor
+                    textInputView.label.textColor = selectedPlaceholderColor
                 }
                 if let disabledPlaceholderColor = style.placeholderColor?.disabled {
-                    textInputView.setNormalLabelColor(disabledPlaceholderColor, for: .disabled)
-                    textInputView.setFloatingLabelColor(disabledPlaceholderColor, for: .disabled)
+                    textInputView.label.textColor = disabledPlaceholderColor
+                    textInputView.label.textColor = disabledPlaceholderColor
                 }
             case .attributed(let attributedText):
                 textInputView.label.attributedText = attributedText
