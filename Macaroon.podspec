@@ -222,11 +222,6 @@ Pod::Spec.new do |s|
     ss.source_files = 'macaroon/Classes/TabBar/*.swift'
   end
 
-  s.subspec 'Tryouts' do |ss|
-    ss.source_files = 'macaroon/Classes/Tryouts/*.swift'
-    ss.dependency 'Tryouts'
-  end
-
   s.subspec 'URLImage' do |ss|
     ss.source_files = 'macaroon/Classes/URLImage/*.swift'
 

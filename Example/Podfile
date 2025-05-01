@@ -14,7 +14,6 @@ target 'macaroon_Example' do
   pod 'Macaroon/SwiftLint',  :path => '../'
   pod 'Macaroon/SVGImage', :path => '../'
   pod 'Macaroon/TabBar', :path => '../'
-  pod 'Macaroon/Tryouts',  :path => '../'
   pod 'Macaroon/Zendesk-Chat', :path => '../'
 
   target 'macaroon_Tests' do

@@ -135,8 +135,6 @@ PODS:
   - Macaroon/SwiftLint (1.1.5):
     - SwiftLint (~> 0.59.1)
   - Macaroon/TabBar (1.1.5)
-  - Macaroon/Tryouts (1.1.5):
-    - Tryouts
   - Macaroon/URLImage (1.1.5):
     - Kingfisher (~> 5.0)
     - Macaroon/URLImage/Utils (= 1.1.5)
@@ -226,7 +224,6 @@ PODS:
   - SnapKit (5.7.1)
   - SwiftLint (0.59.1)
   - SWXMLHash (5.0.1)
-  - Tryouts (0.2.2)
   - ZendeskChatProvidersSDK (3.0.0)
   - ZendeskChatSDK (3.0.0):
     - ZendeskChatProvidersSDK (= 3.0.0)
@@ -252,7 +249,6 @@ DEPENDENCIES:
   - Macaroon/SVGImage (from `../`)
   - Macaroon/SwiftLint (from `../`)
   - Macaroon/TabBar (from `../`)
-  - Macaroon/Tryouts (from `../`)
   - Macaroon/Zendesk-Chat (from `../`)
 
 SPEC REPOS:
@@ -265,7 +261,6 @@ SPEC REPOS:
     - SnapKit
     - SwiftLint
     - SWXMLHash
-    - Tryouts
     - ZendeskChatProvidersSDK
     - ZendeskChatSDK
     - ZendeskCommonUISDK
@@ -279,7 +274,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
-  Macaroon: 2ea81f190e9255d131ca04b998c1434db668cee4
+  Macaroon: c1e4e8820d7e8ae1fc0faf762b68b73d9449be37
   Macaw: 4a931baf9a9826b06d0d8ecf300014c962ab9d50
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
@@ -287,7 +282,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SwiftLint: 3d48e2fb2a3468fdaccf049e5e755df22fb40c2c
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
-  Tryouts: 895f75819b337f1d0de7c2d0ed743f254e4cbb99
   ZendeskChatProvidersSDK: af93e02e2058875f92e6ad86e74ee51203b4079e
   ZendeskChatSDK: fe03650a5ebe3d35fd1f4da90792021f809bcf11
   ZendeskCommonUISDK: f06dbac6c9e74c3afff75ecdc6bec3832b23258c
@@ -295,6 +289,6 @@ SPEC CHECKSUMS:
   ZendeskMessagingSDK: 4f5f3d43766bb3b2ea6411d1331cfe609ff33618
   ZendeskSDKConfigurationsSDK: a5c21010e17b71d02bc2cfe73dcc9da1efa0a7b2
 
-PODFILE CHECKSUM: ee060a736ce12c5c62407e46d1d3431310a0b9d4
+PODFILE CHECKSUM: 7e3e4e003219ec06356231ddb1b992a728bd72a3
 
 COCOAPODS: 1.16.2
