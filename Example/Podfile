@@ -1,6 +1,8 @@
 use_frameworks!
 inhibit_all_warnings!
 
+platform :ios, '13.0'
+
 target 'macaroon_Example' do
   pod 'Macaroon/Banner',  :path => '../'
   pod 'Macaroon/Biometrics',  :path => '../'

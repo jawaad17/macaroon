@@ -169,7 +169,7 @@ PODS:
     - Kingfisher (~> 8.3.2)
     - SWXMLHash (~> 5.0.1)
   - Macaroon/Zendesk-Chat (1.1.5):
-    - ZendeskChatSDK (~> 3.0.0)
+    - ZendeskChatSDK (~> 5.0.5)
   - Macaw (0.9.7):
     - SWXMLHash
   - MaterialComponents/AnimationTiming (124.2.0)
@@ -222,17 +222,17 @@ PODS:
   - SnapKit (5.7.1)
   - SwiftLint (0.59.1)
   - SWXMLHash (5.0.1)
-  - ZendeskChatProvidersSDK (3.0.0)
-  - ZendeskChatSDK (3.0.0):
-    - ZendeskChatProvidersSDK (= 3.0.0)
-    - ZendeskMessagingSDK (= 4.0.0)
-  - ZendeskCommonUISDK (7.0.0)
-  - ZendeskMessagingAPISDK (4.0.0):
-    - ZendeskSDKConfigurationsSDK (= 2.0.0)
-  - ZendeskMessagingSDK (4.0.0):
-    - ZendeskCommonUISDK (= 7.0.0)
-    - ZendeskMessagingAPISDK (= 4.0.0)
-  - ZendeskSDKConfigurationsSDK (2.0.0)
+  - ZendeskChatProvidersSDK (5.0.5)
+  - ZendeskChatSDK (5.0.5):
+    - ZendeskChatProvidersSDK (~> 5.0.5)
+    - ZendeskMessagingSDK (~> 6.0.3)
+  - ZendeskCommonUISDK (9.0.3)
+  - ZendeskMessagingAPISDK (6.0.2):
+    - ZendeskSDKConfigurationsSDK (~> 4.0.1)
+  - ZendeskMessagingSDK (6.0.3):
+    - ZendeskCommonUISDK (~> 9.0.3)
+    - ZendeskMessagingAPISDK (~> 6.0.2)
+  - ZendeskSDKConfigurationsSDK (4.0.1)
 
 DEPENDENCIES:
   - Macaroon/Banner (from `../`)
@@ -272,7 +272,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kingfisher: 0621d0ac0c78fecb19f6dc5303bde2b52abaf2f5
-  Macaroon: e544ca52dde6087eff75b5456aeb7d0584ed8596
+  Macaroon: 8396ab227099b7fae464d399c1c4135e73d09218
   Macaw: 4a931baf9a9826b06d0d8ecf300014c962ab9d50
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
@@ -280,13 +280,13 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SwiftLint: 3d48e2fb2a3468fdaccf049e5e755df22fb40c2c
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
-  ZendeskChatProvidersSDK: af93e02e2058875f92e6ad86e74ee51203b4079e
-  ZendeskChatSDK: fe03650a5ebe3d35fd1f4da90792021f809bcf11
-  ZendeskCommonUISDK: f06dbac6c9e74c3afff75ecdc6bec3832b23258c
-  ZendeskMessagingAPISDK: 95a99f1eab9482b4106ec88466b93a89f9f7c5fa
-  ZendeskMessagingSDK: 4f5f3d43766bb3b2ea6411d1331cfe609ff33618
-  ZendeskSDKConfigurationsSDK: a5c21010e17b71d02bc2cfe73dcc9da1efa0a7b2
+  ZendeskChatProvidersSDK: 5cfc4a3dee03317ba54920e3258edda52ff9a329
+  ZendeskChatSDK: 8e0041101a89c8fed51dadb14697bbb4bb4700fd
+  ZendeskCommonUISDK: f3ce3e7a1bd7762550a78dbaff57509f3112c22b
+  ZendeskMessagingAPISDK: 5b3a9d16f2f4d8b3c07b4ca0451a7cf9bfd8107d
+  ZendeskMessagingSDK: 3915f0647246f079dd20bf2fd85084f495598fde
+  ZendeskSDKConfigurationsSDK: d0b28eeb9c3d88191cfd2c7f246b2522c8c357f4
 
-PODFILE CHECKSUM: ea2d3fb2b73fad9ca66e87d00b421f09b620a621
+PODFILE CHECKSUM: 9a29d2b19e3fb0d5e56124478e2aee9d3e7257f9
 
 COCOAPODS: 1.16.2

@@ -34,13 +34,18 @@ open class ZendeskHandler: DevTool {
 
         do {
             let chatEngine = try ChatEngine.engine()
-
+            
             let instance = Messaging.instance
             instance.delegate = self
-
+            
             let chatConfiguration = ChatConfiguration()
-            chatConfiguration.preChatFormConfiguration = ChatFormConfiguration(name: .hidden, email: .hidden, phoneNumber: .hidden, department: .hidden)
-
+            chatConfiguration.preChatFormConfiguration = ChatFormConfiguration(
+                name: .hidden,
+                email: .hidden,
+                phoneNumber: .hidden,
+                department: .hidden
+            )
+            
             return try instance.buildUI(engines: [chatEngine], configs: [chatConfiguration])
         } catch let error {
             fatalError("Zendesk Chat not initialized properly. Reason: \(error.localizedDescription)")
@@ -74,7 +79,12 @@ extension ZendeskHandler {
 extension ZendeskHandler {
     private func initialize() {
         if config.isValid {
-            Chat.initialize(accountKey: config.accountKey, appId: config.appId)
+            // Updated initialization with additional parameters
+            Chat.initialize(
+                accountKey: config.accountKey,
+                appId: config.appId,
+                queue: .main
+            )
 
             if let themeColor = config.themeColor {
                 CommonTheme.currentTheme.primaryColor = themeColor
@@ -90,7 +100,11 @@ extension ZendeskHandler {
 
     private func set(_ visitor: ZendeskVisitor?) {
         let configuration = ChatAPIConfiguration()
-        configuration.visitorInfo = VisitorInfo(name: visitor.unwrap(ifPresent: \.fullName, or: ""), email: visitor.unwrap(ifPresent: \.email, or: ""), phoneNumber: visitor.unwrap(ifPresent: \.phoneNumber, or: ""))
+        configuration.visitorInfo = VisitorInfo(
+            name: visitor.unwrap(ifPresent: \.fullName, or: ""),
+            email: visitor.unwrap(ifPresent: \.email, or: ""),
+            phoneNumber: visitor.unwrap(ifPresent: \.phoneNumber, or: "")
+        )
         Chat.instance?.configuration = configuration
     }
 }
