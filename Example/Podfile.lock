@@ -1,170 +1,179 @@
 PODS:
-  - Kingfisher (5.14.0):
-    - Kingfisher/Core (= 5.14.0)
-  - Kingfisher/Core (5.14.0)
-  - Macaroon/Banner (1.1.2)
-  - Macaroon/Biometrics (1.1.2)
-  - Macaroon/Core (1.1.2):
-    - Macaroon/Core/Application (= 1.1.2)
-    - Macaroon/Core/Error (= 1.1.2)
-    - Macaroon/Core/Screens (= 1.1.2)
-    - Macaroon/Core/Utils (= 1.1.2)
-    - Macaroon/Core/Views (= 1.1.2)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
+  - Macaroon/Banner (1.1.4)
+  - Macaroon/Biometrics (1.1.4)
+  - Macaroon/Core (1.1.4):
+    - Macaroon/Core/Application (= 1.1.4)
+    - Macaroon/Core/Error (= 1.1.4)
+    - Macaroon/Core/Screens (= 1.1.4)
+    - Macaroon/Core/Utils (= 1.1.4)
+    - Macaroon/Core/Views (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core-Hipo (1.1.2)
-  - Macaroon/Core/Application (1.1.2):
-    - Macaroon/Core/Application/Analytics (= 1.1.2)
-    - Macaroon/Core/Application/Launch (= 1.1.2)
-    - Macaroon/Core/Application/Route (= 1.1.2)
+  - Macaroon/Core-Hipo (1.1.4)
+  - Macaroon/Core/Application (1.1.4):
+    - Macaroon/Core/Application/Analytics (= 1.1.4)
+    - Macaroon/Core/Application/Launch (= 1.1.4)
+    - Macaroon/Core/Application/Route (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Application/Analytics (1.1.2):
+  - Macaroon/Core/Application/Analytics (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Application/Launch (1.1.2):
+  - Macaroon/Core/Application/Launch (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Application/Route (1.1.2):
-    - Macaroon/Core/Application/Route/Deeplink (= 1.1.2)
+  - Macaroon/Core/Application/Route (1.1.4):
+    - Macaroon/Core/Application/Route/Deeplink (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Application/Route/Deeplink (1.1.2):
+  - Macaroon/Core/Application/Route/Deeplink (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Error (1.1.2):
+  - Macaroon/Core/Error (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens (1.1.2):
-    - Macaroon/Core/Screens/Configuration (= 1.1.2)
-    - Macaroon/Core/Screens/Containers (= 1.1.2)
-    - Macaroon/Core/Screens/List (= 1.1.2)
+  - Macaroon/Core/Screens (1.1.4):
+    - Macaroon/Core/Screens/Configuration (= 1.1.4)
+    - Macaroon/Core/Screens/Containers (= 1.1.4)
+    - Macaroon/Core/Screens/List (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/Configuration (1.1.2):
-    - Macaroon/Core/Screens/Configuration/NavigationBar (= 1.1.2)
-    - Macaroon/Core/Screens/Configuration/StatusBar (= 1.1.2)
+  - Macaroon/Core/Screens/Configuration (1.1.4):
+    - Macaroon/Core/Screens/Configuration/NavigationBar (= 1.1.4)
+    - Macaroon/Core/Screens/Configuration/StatusBar (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/Configuration/NavigationBar (1.1.2):
+  - Macaroon/Core/Screens/Configuration/NavigationBar (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/Configuration/StatusBar (1.1.2):
+  - Macaroon/Core/Screens/Configuration/StatusBar (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/Containers (1.1.2):
+  - Macaroon/Core/Screens/Containers (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/List (1.1.2):
-    - Macaroon/Core/Screens/List/Configuration (= 1.1.2)
+  - Macaroon/Core/Screens/List (1.1.4):
+    - Macaroon/Core/Screens/List/Configuration (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Screens/List/Configuration (1.1.2):
+  - Macaroon/Core/Screens/List/Configuration (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils (1.1.2):
-    - Macaroon/Core/Utils/Extensions (= 1.1.2)
-    - Macaroon/Core/Utils/Image (= 1.1.2)
-    - Macaroon/Core/Utils/List (= 1.1.2)
-    - Macaroon/Core/Utils/Notification (= 1.1.2)
-    - Macaroon/Core/Utils/Performance (= 1.1.2)
-    - Macaroon/Core/Utils/Text (= 1.1.2)
-    - Macaroon/Core/Utils/Time (= 1.1.2)
+  - Macaroon/Core/Utils (1.1.4):
+    - Macaroon/Core/Utils/Extensions (= 1.1.4)
+    - Macaroon/Core/Utils/Image (= 1.1.4)
+    - Macaroon/Core/Utils/List (= 1.1.4)
+    - Macaroon/Core/Utils/Notification (= 1.1.4)
+    - Macaroon/Core/Utils/Performance (= 1.1.4)
+    - Macaroon/Core/Utils/Text (= 1.1.4)
+    - Macaroon/Core/Utils/Time (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Extensions (1.1.2):
-    - Macaroon/Core/Utils/Extensions/Foundation (= 1.1.2)
-    - Macaroon/Core/Utils/Extensions/UI (= 1.1.2)
+  - Macaroon/Core/Utils/Extensions (1.1.4):
+    - Macaroon/Core/Utils/Extensions/Foundation (= 1.1.4)
+    - Macaroon/Core/Utils/Extensions/UI (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Extensions/Foundation (1.1.2):
+  - Macaroon/Core/Utils/Extensions/Foundation (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Extensions/UI (1.1.2):
+  - Macaroon/Core/Utils/Extensions/UI (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Image (1.1.2):
+  - Macaroon/Core/Utils/Image (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/List (1.1.2):
+  - Macaroon/Core/Utils/List (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Notification (1.1.2):
+  - Macaroon/Core/Utils/Notification (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Performance (1.1.2):
+  - Macaroon/Core/Utils/Performance (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Text (1.1.2):
-    - Macaroon/Core/Utils/Text/Attributed (= 1.1.2)
+  - Macaroon/Core/Utils/Text (1.1.4):
+    - Macaroon/Core/Utils/Text/Attributed (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Text/Attributed (1.1.2):
+  - Macaroon/Core/Utils/Text/Attributed (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Utils/Time (1.1.2):
+  - Macaroon/Core/Utils/Time (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views (1.1.2):
-    - Macaroon/Core/Views/BaseComponents (= 1.1.2)
-    - Macaroon/Core/Views/Components (= 1.1.2)
-    - Macaroon/Core/Views/Configuration (= 1.1.2)
-    - Macaroon/Core/Views/ListComponents (= 1.1.2)
+  - Macaroon/Core/Views (1.1.4):
+    - Macaroon/Core/Views/BaseComponents (= 1.1.4)
+    - Macaroon/Core/Views/Components (= 1.1.4)
+    - Macaroon/Core/Views/Configuration (= 1.1.4)
+    - Macaroon/Core/Views/ListComponents (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/BaseComponents (1.1.2):
+  - Macaroon/Core/Views/BaseComponents (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Components (1.1.2):
-    - Macaroon/Core/Views/Components/EmptyStateView (= 1.1.2)
-    - Macaroon/Core/Views/Components/MaskedTextInputView (= 1.1.2)
-    - Macaroon/Core/Views/Components/SegmentedControl (= 1.1.2)
+  - Macaroon/Core/Views/Components (1.1.4):
+    - Macaroon/Core/Views/Components/EmptyStateView (= 1.1.4)
+    - Macaroon/Core/Views/Components/MaskedTextInputView (= 1.1.4)
+    - Macaroon/Core/Views/Components/SegmentedControl (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Components/EmptyStateView (1.1.2):
+  - Macaroon/Core/Views/Components/EmptyStateView (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Components/MaskedTextInputView (1.1.2):
+  - Macaroon/Core/Views/Components/MaskedTextInputView (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Components/SegmentedControl (1.1.2):
+  - Macaroon/Core/Views/Components/SegmentedControl (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration (1.1.2):
-    - Macaroon/Core/Views/Configuration/Data (= 1.1.2)
-    - Macaroon/Core/Views/Configuration/Layout (= 1.1.2)
-    - Macaroon/Core/Views/Configuration/Styling (= 1.1.2)
+  - Macaroon/Core/Views/Configuration (1.1.4):
+    - Macaroon/Core/Views/Configuration/Data (= 1.1.4)
+    - Macaroon/Core/Views/Configuration/Layout (= 1.1.4)
+    - Macaroon/Core/Views/Configuration/Styling (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Data (1.1.2):
+  - Macaroon/Core/Views/Configuration/Data (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Layout (1.1.2):
+  - Macaroon/Core/Views/Configuration/Layout (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Styling (1.1.2):
-    - Macaroon/Core/Views/Configuration/Styling/Customization (= 1.1.2)
+  - Macaroon/Core/Views/Configuration/Styling (1.1.4):
+    - Macaroon/Core/Views/Configuration/Styling/Customization (= 1.1.4)
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/Configuration/Styling/Customization (1.1.2):
+  - Macaroon/Core/Views/Configuration/Styling/Customization (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/Core/Views/ListComponents (1.1.2):
+  - Macaroon/Core/Views/ListComponents (1.1.4):
     - SnapKit (~> 5.0.0)
-  - Macaroon/CustomUI/FloatingPlaceholderTextInputs (1.1.2):
+  - Macaroon/CustomUI/FloatingPlaceholderTextInputs (1.1.4):
     - "MaterialComponents/TextControls+FilledTextAreas (~> 110.1.0)"
     - "MaterialComponents/TextControls+FilledTextFields (~> 110.1.0)"
-  - Macaroon/Form (1.1.2):
-    - Macaroon/Form/Screens (= 1.1.2)
-    - Macaroon/Form/Utils (= 1.1.2)
-    - Macaroon/Form/Views (= 1.1.2)
-  - Macaroon/Form/Screens (1.1.2)
-  - Macaroon/Form/Utils (1.1.2)
-  - Macaroon/Form/Views (1.1.2)
-  - Macaroon/MediaPicker (1.1.2)
-  - Macaroon/Mixpanel (1.1.2):
+  - Macaroon/Form (1.1.4):
+    - Macaroon/Form/Screens (= 1.1.4)
+    - Macaroon/Form/Utils (= 1.1.4)
+    - Macaroon/Form/Views (= 1.1.4)
+  - Macaroon/Form/Screens (1.1.4)
+  - Macaroon/Form/Utils (1.1.4)
+  - Macaroon/Form/Views (1.1.4)
+  - Macaroon/MediaPicker (1.1.4)
+  - Macaroon/Mixpanel (1.1.4):
     - Mixpanel-swift (~> 2.7)
-  - Macaroon/PushNotification (1.1.2)
-  - Macaroon/SVGImage (1.1.2):
+  - Macaroon/PushNotification (1.1.4)
+  - Macaroon/SVGImage (1.1.4):
     - Macaroon/URLImage
     - Macaw (= 0.9.7)
-  - Macaroon/SwiftLint (1.1.2):
+  - Macaroon/SwiftLint (1.1.4):
     - SwiftLint (~> 0.40)
-  - Macaroon/TabBar (1.1.2)
-  - Macaroon/Tryouts (1.1.2):
+  - Macaroon/TabBar (1.1.4)
+  - Macaroon/Tryouts (1.1.4):
     - Tryouts
-  - Macaroon/URLImage (1.1.2):
+  - Macaroon/URLImage (1.1.4):
     - Kingfisher (~> 5.0)
-    - Macaroon/URLImage/Utils (= 1.1.2)
-    - Macaroon/URLImage/ViewModels (= 1.1.2)
-    - Macaroon/URLImage/Views (= 1.1.2)
-  - Macaroon/URLImage/Utils (1.1.2):
+    - Macaroon/URLImage/Utils (= 1.1.4)
+    - Macaroon/URLImage/ViewModels (= 1.1.4)
+    - Macaroon/URLImage/Views (= 1.1.4)
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Utils (1.1.4):
     - Kingfisher (~> 5.0)
-    - Macaroon/URLImage/Utils/Extensions (= 1.1.2)
-    - Macaroon/URLImage/Utils/Properties (= 1.1.2)
-  - Macaroon/URLImage/Utils/Extensions (1.1.2):
+    - Macaroon/URLImage/Utils/Extensions (= 1.1.4)
+    - Macaroon/URLImage/Utils/Properties (= 1.1.4)
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Utils/Extensions (1.1.4):
     - Kingfisher (~> 5.0)
-  - Macaroon/URLImage/Utils/Properties (1.1.2):
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Utils/Properties (1.1.4):
     - Kingfisher (~> 5.0)
-  - Macaroon/URLImage/ViewModels (1.1.2):
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/ViewModels (1.1.4):
     - Kingfisher (~> 5.0)
-  - Macaroon/URLImage/Views (1.1.2):
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Views (1.1.4):
     - Kingfisher (~> 5.0)
-    - Macaroon/URLImage/Views/Components (= 1.1.2)
-    - Macaroon/URLImage/Views/Configuration (= 1.1.2)
-  - Macaroon/URLImage/Views/Components (1.1.2):
+    - Macaroon/URLImage/Views/Components (= 1.1.4)
+    - Macaroon/URLImage/Views/Configuration (= 1.1.4)
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Views/Components (1.1.4):
     - Kingfisher (~> 5.0)
-  - Macaroon/URLImage/Views/Configuration (1.1.2):
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Views/Configuration (1.1.4):
     - Kingfisher (~> 5.0)
-    - Macaroon/URLImage/Views/Configuration/Styling (= 1.1.2)
-  - Macaroon/URLImage/Views/Configuration/Styling (1.1.2):
+    - Macaroon/URLImage/Views/Configuration/Styling (= 1.1.4)
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/URLImage/Views/Configuration/Styling (1.1.4):
     - Kingfisher (~> 5.0)
-  - Macaroon/Zendesk-Chat (1.1.2):
-    - ZendeskChatSDK (~> 2.9)
+    - SWXMLHash (~> 5.0.1)
+  - Macaroon/Zendesk-Chat (1.1.4):
+    - ZendeskChatSDK (~> 3.0.0)
   - Macaw (0.9.7):
     - SWXMLHash
   - MaterialComponents/AnimationTiming (110.1.0)
@@ -210,26 +219,25 @@ PODS:
     - MaterialComponents/Availability
     - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
     - "MaterialComponents/TextControls+BaseTextFields"
-  - MDFInternationalization (2.0.0)
-  - Mixpanel-swift (2.7.7):
-    - Mixpanel-swift/Complete (= 2.7.7)
-  - Mixpanel-swift/Complete (2.7.7)
+  - MDFInternationalization (3.0.0)
+  - Mixpanel-swift (2.10.4):
+    - Mixpanel-swift/Complete (= 2.10.4)
+  - Mixpanel-swift/Complete (2.10.4)
   - SnapKit (5.0.1)
-  - SwiftLint (0.40.3)
+  - SwiftLint (0.59.1)
   - SWXMLHash (5.0.1)
-  - Tryouts (0.2.1)
-  - ZendeskChatProvidersSDK (2.9.0)
-  - ZendeskChatSDK (2.9.0):
-    - ZendeskChatProvidersSDK (~> 2.9.0)
-    - ZendeskMessagingSDK (~> 3.8.0)
-  - ZendeskCommonUISDK (6.0.0):
-    - ZendeskSDKConfigurationsSDK (~> 1.1.6)
-  - ZendeskMessagingAPISDK (3.8.0):
-    - ZendeskSDKConfigurationsSDK (~> 1.1.6)
-  - ZendeskMessagingSDK (3.8.0):
-    - ZendeskCommonUISDK (~> 6.0.0)
-    - ZendeskMessagingAPISDK (~> 3.8.0)
-  - ZendeskSDKConfigurationsSDK (1.1.6)
+  - Tryouts (0.2.2)
+  - ZendeskChatProvidersSDK (3.0.0)
+  - ZendeskChatSDK (3.0.0):
+    - ZendeskChatProvidersSDK (= 3.0.0)
+    - ZendeskMessagingSDK (= 4.0.0)
+  - ZendeskCommonUISDK (7.0.0)
+  - ZendeskMessagingAPISDK (4.0.0):
+    - ZendeskSDKConfigurationsSDK (= 2.0.0)
+  - ZendeskMessagingSDK (4.0.0):
+    - ZendeskCommonUISDK (= 7.0.0)
+    - ZendeskMessagingAPISDK (= 4.0.0)
+  - ZendeskSDKConfigurationsSDK (2.0.0)
 
 DEPENDENCIES:
   - Macaroon/Banner (from `../`)
@@ -270,23 +278,23 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
-  Macaroon: 26fd8d34246c226d36b6cf68497563cf5b50431a
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  Macaroon: 9ddc22e3be21d777dbe14debd37786bc0714ff5a
   Macaw: 4a931baf9a9826b06d0d8ecf300014c962ab9d50
   MaterialComponents: 4cb6659322cfc38bb0a7e40fba1866daaefeb12c
-  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
-  Mixpanel-swift: 3a8fb9ce791e9c64d556b9446aa470b469c6fa7d
+  MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
+  Mixpanel-swift: 9fabd0585985d32cb6951e759d307d615a9c6f7b
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
+  SwiftLint: 3d48e2fb2a3468fdaccf049e5e755df22fb40c2c
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
-  Tryouts: dabd03aa73c2b5d253a649d306df523fc090fcee
-  ZendeskChatProvidersSDK: dd8cbf33c4b7209a8ee7945faa4d2cd3b609ff15
-  ZendeskChatSDK: 942bad4d4d5ec0c40fbd6d2690c1cc2e8c24d879
-  ZendeskCommonUISDK: f496b95e2cb728bd5729fe022f400cf1dedda00b
-  ZendeskMessagingAPISDK: e315a6ad7a9b6cae9e52d946df4aa8a7727abdf5
-  ZendeskMessagingSDK: 774d88bec0671d58ae51c9964d4c4f9bb4142095
-  ZendeskSDKConfigurationsSDK: 2fa9413915db85c993f58ad8f7902bea0b6090a5
+  Tryouts: 895f75819b337f1d0de7c2d0ed743f254e4cbb99
+  ZendeskChatProvidersSDK: af93e02e2058875f92e6ad86e74ee51203b4079e
+  ZendeskChatSDK: fe03650a5ebe3d35fd1f4da90792021f809bcf11
+  ZendeskCommonUISDK: f06dbac6c9e74c3afff75ecdc6bec3832b23258c
+  ZendeskMessagingAPISDK: 95a99f1eab9482b4106ec88466b93a89f9f7c5fa
+  ZendeskMessagingSDK: 4f5f3d43766bb3b2ea6411d1331cfe609ff33618
+  ZendeskSDKConfigurationsSDK: a5c21010e17b71d02bc2cfe73dcc9da1efa0a7b2
 
-PODFILE CHECKSUM: d6ed2384b2b92ac5945734830762b771fba47b6f
+PODFILE CHECKSUM: ee060a736ce12c5c62407e46d1d3431310a0b9d4
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.16.2

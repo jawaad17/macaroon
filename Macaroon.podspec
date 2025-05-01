@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name = 'Macaroon'
-  s.version = '1.1.3'
+  s.version = '1.1.4'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage = 'https://github.com/jawaad17/macaroon'
   s.summary = 'iOS UIKit extension framework for providing structural interface functionality'
@@ -259,17 +259,18 @@ Pod::Spec.new do |s|
     end
 
     ss.dependency 'Kingfisher', '~> 5.0'
+    ss.dependency 'SWXMLHash', '~> 5.0.1'
   end
 
   s.subspec 'Zendesk-Chat' do |ss|
     ss.source_files = 'macaroon/Classes/ZendeskChat/*.swift'
 
-    ss.dependency 'ZendeskChatSDK', '~> 2.9'
+    ss.dependency 'ZendeskChatSDK', '~> 3.0.0'
   end
 
   s.subspec 'Zendesk-Support' do |ss|
     ss.source_files = 'macaroon/Classes/ZendeskSupport/*.swift'
 
-    ss.dependency 'ZendeskSupportSDK', '~> 5.0'
+    ss.dependency 'ZendeskSupportSDK', '~> 5.4.0'
   end
 end
