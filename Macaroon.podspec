@@ -163,7 +163,7 @@ Pod::Spec.new do |s|
       end
     end
 
-    ss.dependency 'SnapKit', '~> 5.0.0'
+    ss.dependency 'SnapKit', '~> 5.7.1'
   end
 
   s.subspec 'Core-Hipo' do |ss|
